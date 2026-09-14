@@ -1,171 +1,18 @@
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("navLinks");
-
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
-
-
-document.querySelectorAll("#navLinks a").forEach(link => {
-
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-  });
-
-});
-
-
-const price = document.getElementById("price");
-const shipping = document.getElementById("shipping");
-const quantity = document.getElementById("quantity");
-
-
-function money(number) {
-
-  return Number(number || 0).toFixed(2);
-
-}
-
-
-function calculateQuote() {
-
-  const itemPrice = Number(price.value || 0);
-
-  const qty = Number(quantity.value || 1);
-
-  const shippingFee = Number(shipping.value || 0);
-
-  const subtotal = itemPrice * qty;
-
-  const runnerFee = subtotal * 0.30;
-
-  const total = subtotal + runnerFee + shippingFee;
-
-
-  document.getElementById("subtotal").textContent =
-    money(subtotal);
-
-  document.getElementById("runnerFee").textContent =
-    money(runnerFee);
-
-  document.getElementById("shippingOut").textContent =
-    money(shippingFee);
-
-  document.getElementById("total").textContent =
-    money(total);
-
-}
-
-
-price.addEventListener("input", calculateQuote);
-
-shipping.addEventListener("input", calculateQuote);
-
-quantity.addEventListener("input", calculateQuote);
-
-calculateQuote();
-
-
-document
-  .getElementById("quoteForm")
-  .addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-
-    const name =
-      document.getElementById("name").value.trim();
-
-    const phone =
-      document.getElementById("phone").value.trim();
-
-    const store =
-      document.getElementById("store").value;
-
-    const product =
-      document.getElementById("product").value.trim();
-
-    const link =
-      document.getElementById("link").value.trim();
-
-    const qty =
-      Number(document.getElementById("quantity").value || 1);
-
-    const itemPrice =
-      Number(document.getElementById("price").value || 0);
-
-    const shippingFee =
-      Number(document.getElementById("shipping").value || 0);
-
-    const delivery =
-      document.getElementById("delivery").value;
-
-    const notes =
-      document.getElementById("notes").value.trim();
-
-
-    const subtotal =
-      itemPrice * qty;
-
-    const runnerFee =
-      subtotal * 0.30;
-
-    const total =
-      subtotal + runnerFee + shippingFee;
-
-
-    const message =
-
-`GLOBAL CART RUNNER
-QUOTE REQUEST
-
-Customer Name:
-${name}
-
-Customer WhatsApp:
-${phone}
-
-Store:
-${store}
-
-Product:
-${product}
-
-Product Link:
-${link || "Not provided"}
-
-Quantity:
-${qty}
-
-Item Subtotal:
-${money(subtotal)}
-
-Runner Fee (30%):
-${money(runnerFee)}
-
-Shipping:
-${money(shippingFee)}
-
-Estimated Total:
-${money(total)}
-
-Delivery Preference:
-${delivery}
-
-Additional Notes:
-${notes || "None"}
-
-Please confirm the final quote and next steps.`;
-
-
-    const whatsappURL =
-      "https://wa.me/26876786258?text=" +
-      encodeURIComponent(message);
-
-
-    window.open(
-      whatsappURL,
-      "_blank"
-    );
-
-});
+const WA_NUMBER="26876786258", RUNNER_RATE=0.30, STORAGE_KEY="gcr_orders_v1";
+const statuses=["Quote Requested","Quote Confirmed","Payment Pending","Payment Received","Order Placed","Processing","Shipped","Arrived in Eswatini","Out for Delivery","Delivered"];
+const $=id=>document.getElementById(id), money=n=>Number(n||0).toFixed(2);
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+function getOrders(){const raw=localStorage.getItem(STORAGE_KEY);if(raw)return JSON.parse(raw);const demo={"GCR-1001":{orderNumber:"GCR-1001",customer:"Demo Customer",store:"SHEIN",paymentStatus:"Payment Received",status:"Processing",delivery:"Standard delivery",updated:"Demo order for testing",note:"This is a demo order. Replace it with a real customer order."}};localStorage.setItem(STORAGE_KEY,JSON.stringify(demo));return demo;}
+function saveOrders(o){localStorage.setItem(STORAGE_KEY,JSON.stringify(o));}
+function calculate(){const subtotal=(Number($("itemPrice").value)||0)*(Number($("quantity").value)||1),fee=subtotal*RUNNER_RATE,shipping=Number($("shippingFee").value)||0;$("subtotal").textContent=money(subtotal);$("runnerFee").textContent=money(fee);$("shippingDisplay").textContent=money(shipping);$("estimatedTotal").textContent=money(subtotal+fee+shipping);}
+["itemPrice","quantity","shippingFee"].forEach(id=>$(id).addEventListener("input",calculate));calculate();
+$("quoteForm").addEventListener("submit",e=>{e.preventDefault();const subtotal=(Number($("itemPrice").value)||0)*(Number($("quantity").value)||1),fee=subtotal*RUNNER_RATE,shipping=Number($("shippingFee").value)||0,total=subtotal+fee+shipping;const text=`GLOBAL CART RUNNER\nQUOTE REQUEST\n\nCustomer Name: ${$("fullName").value.trim()}\nCustomer WhatsApp: ${$("customerWhatsApp").value.trim()}\nStore: ${$("store").value}\nProduct: ${$("productName").value.trim()}\nProduct Link: ${$("productLink").value.trim()||"Not provided"}\nQuantity: ${$("quantity").value}\nItem Subtotal: ${money(subtotal)}\nRunner Fee (30%): ${money(fee)}\nShipping: ${money(shipping)}\nEstimated Total: ${money(total)}\nDelivery Preference: ${$("deliveryPreference").value}\nAdditional Notes: ${$("notes").value.trim()||"None"}\n\nPlease confirm the final quote and next steps.`;window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,"_blank");});
+function renderTracking(order){const box=$("trackingResult");if(!order){box.innerHTML='<div class="tracking-card error"><b>Order not found.</b><p>Check the GCR order number and try again.</p></div>';return;}const idx=Math.max(0,statuses.indexOf(order.status));const timeline=statuses.map((s,i)=>`<li class="${i<=idx?'done':''}"><span>${s}</span>${i===idx?'<small>Current status</small>':''}</li>`).join("");box.innerHTML=`<div class="tracking-card"><div class="tracking-head"><div><h3>${escapeHtml(order.orderNumber)}</h3><p>${escapeHtml(order.customer||"")}</p></div><span class="status">${escapeHtml(order.status)}</span></div><div class="tracking-info"><p><b>Store</b><br>${escapeHtml(order.store||"")}</p><p><b>Payment</b><br>${escapeHtml(order.paymentStatus||"")}</p><p><b>Delivery</b><br>${escapeHtml(order.delivery||"")}</p><p><b>Last update</b><br>${escapeHtml(order.updated||"")}</p></div>${order.note?`<p><b>Note:</b> ${escapeHtml(order.note)}</p>`:""}<ol class="timeline">${timeline}</ol></div>`;}
+$("trackingForm").addEventListener("submit",e=>{e.preventDefault();const key=$("trackingNumber").value.trim().toUpperCase();renderTracking(getOrders()[key]);});
+function renderAdmin(){const orders=getOrders();$("adminList").innerHTML=Object.values(orders).sort((a,b)=>a.orderNumber.localeCompare(b.orderNumber)).map(o=>`<div class="admin-order"><b>${escapeHtml(o.orderNumber)}</b> — ${escapeHtml(o.customer||"")}<br><span>${escapeHtml(o.status)} • ${escapeHtml(o.paymentStatus||"")}</span><br><button class="btn secondary" onclick="loadOrder('${escapeHtml(o.orderNumber)}')">Edit</button> <button class="btn secondary" onclick="viewOrder('${escapeHtml(o.orderNumber)}')">View</button></div>`).join("");}
+window.loadOrder=num=>{const o=getOrders()[num];if(!o)return;$("adminOrder").value=o.orderNumber;$("adminCustomer").value=o.customer||"";$("adminStore").value=o.store||"";$("adminPayment").value=o.paymentStatus||"Payment Pending";$("adminStatus").value=o.status||"Quote Requested";$("adminDelivery").value=o.delivery||"Standard delivery";$("adminUpdate").value=o.updated||"";$("adminNote").value=o.note||"";$("adminPanel").classList.remove("hidden");};
+window.viewOrder=num=>{$("trackingNumber").value=num;document.querySelector("#tracking").scrollIntoView({behavior:"smooth"});renderTracking(getOrders()[num]);};
+$("adminForm").addEventListener("submit",e=>{e.preventDefault();const num=$("adminOrder").value.trim().toUpperCase();if(!/^GCR-\d{4,}$/.test(num)){alert("Use an order number like GCR-1002.");return;}const orders=getOrders();orders[num]={orderNumber:num,customer:$("adminCustomer").value.trim(),store:$("adminStore").value.trim(),paymentStatus:$("adminPayment").value,status:$("adminStatus").value,delivery:$("adminDelivery").value.trim(),updated:$("adminUpdate").value.trim()||new Date().toLocaleString(),note:$("adminNote").value.trim(),created:orders[num]?.created||new Date().toISOString()};saveOrders(orders);renderAdmin();alert(`${num} saved.`);});
+$("showAdmin").addEventListener("click",()=>{$("adminPanel").classList.toggle("hidden");renderAdmin();});$("resetDemo").addEventListener("click",()=>{if(confirm("Reset the demo orders stored in this browser?")){localStorage.removeItem(STORAGE_KEY);renderAdmin();alert("Demo order data reset.");}});
+$("menuBtn").addEventListener("click",()=>$("navLinks").classList.toggle("open"));document.querySelectorAll("#navLinks a").forEach(a=>a.addEventListener("click",()=>$("navLinks").classList.remove("open")));
+renderAdmin();
