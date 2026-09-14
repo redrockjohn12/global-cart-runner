@@ -1,13 +1,4 @@
-// ============================================================
-// GLOBAL CART RUNNER
-// Website functionality + Order Tracking V2
-// ============================================================
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    // --------------------------------------------------------
-    // MOBILE MENU
-    // --------------------------------------------------------
 
     const menuToggle = document.getElementById("menuToggle");
     const mainNav = document.getElementById("mainNav");
@@ -24,11 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    // --------------------------------------------------------
-    // CURRENT YEAR
-    // --------------------------------------------------------
-
     const currentYear = document.getElementById("currentYear");
 
     if (currentYear) {
@@ -36,18 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // --------------------------------------------------------
-    // ORDER TRACKING V2
-    // --------------------------------------------------------
-
-    const trackButton = document.getElementById("trackButton");
-    const trackingNumber = document.getElementById("trackingNumber");
-    const trackingResult = document.getElementById("trackingResult");
-
-
-    // --------------------------------------------------------
-    // ORDER STATUS SYSTEM
-    // --------------------------------------------------------
+    // ========================================================
+    // ORDER TRACKING
+    // ========================================================
 
     const orderStatuses = [
         "Order Received",
@@ -61,77 +38,53 @@ document.addEventListener("DOMContentLoaded", () => {
         "Delivered"
     ];
 
+    const trackButton = document.getElementById("trackButton");
+    const trackingNumber = document.getElementById("trackingNumber");
+    const trackingResult = document.getElementById("trackingResult");
 
-    // --------------------------------------------------------
-    // DEMO ORDER
-    // --------------------------------------------------------
-    // This allows GCR-1001 to be tested on the live website.
-    // Real online database integration can be added later.
-    // --------------------------------------------------------
-
-    const demoOrders = {
-
-        "GCR-1001": {
-            orderNumber: "GCR-1001",
-            customer: "Demo Customer",
-            status: "Order Received",
-            payment: "Pending",
-            delivery: "Standard Delivery",
-            lastUpdate: "Order received",
-            orderDate: "14 September 2026",
-            items: "Shopping order",
-            notes: "Your order has been received by Global Cart Runner."
-        }
-
-    };
-
-
-    // --------------------------------------------------------
-    // CLEAN ORDER NUMBER
-    // --------------------------------------------------------
 
     function cleanOrderNumber(value) {
-
-        return String(value)
+        return String(value || "")
             .trim()
             .toUpperCase()
             .replace(/\s+/g, "");
-
     }
 
 
-    // --------------------------------------------------------
-    // ESCAPE HTML
-    // --------------------------------------------------------
-
     function escapeHtml(value) {
-
         return String(value ?? "")
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
-
     }
 
 
-    // --------------------------------------------------------
-    // GET STATUS NUMBER
-    // --------------------------------------------------------
+    function getOrders() {
+        try {
+            return JSON.parse(
+                localStorage.getItem("gcrOrders") || "{}"
+            );
+        } catch {
+            return {};
+        }
+    }
+
+
+    function saveOrders(orders) {
+        localStorage.setItem(
+            "gcrOrders",
+            JSON.stringify(orders)
+        );
+    }
+
 
     function getStatusIndex(status) {
-
         const index = orderStatuses.indexOf(status);
-
         return index >= 0 ? index : 0;
-
     }
 
-
-    // --------------------------------------------------------
-    // BUILD PROGRESS TRACKER
-    // --------------------------------------------------------
 
     function buildProgress(status) {
 
@@ -154,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     return `
                         <div class="tracking-step ${className}">
-
                             <div class="tracking-step-number">
                                 ${index + 1}
                             </div>
@@ -162,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="tracking-step-label">
                                 ${escapeHtml(item)}
                             </div>
-
                         </div>
                     `;
 
@@ -170,17 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </div>
         `;
-
     }
 
 
-    // --------------------------------------------------------
-    // SHOW ORDER
-    // --------------------------------------------------------
-
     function showOrder(order) {
 
-        const statusIndex = getStatusIndex(order.status);
+        if (!trackingResult) return;
 
         trackingResult.innerHTML = `
 
@@ -197,9 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${escapeHtml(order.orderNumber)}
                         </h3>
 
-                        <p>
-                            Order Tracking
-                        </p>
+                        <p>Order Tracking</p>
                     </div>
 
                     <span class="status-pill">
@@ -214,47 +158,42 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="order-info-row">
                         <span>Customer</span>
                         <strong>
-                            ${escapeHtml(order.customer || "Customer")}
+                            ${escapeHtml(order.customer)}
                         </strong>
                     </div>
-
 
                     <div class="order-info-row">
                         <span>Order Date</span>
                         <strong>
-                            ${escapeHtml(order.orderDate || "Not available")}
+                            ${escapeHtml(order.orderDate)}
                         </strong>
                     </div>
-
 
                     <div class="order-info-row">
                         <span>Payment</span>
                         <strong>
-                            ${escapeHtml(order.payment || "Pending")}
+                            ${escapeHtml(order.payment)}
                         </strong>
                     </div>
-
 
                     <div class="order-info-row">
                         <span>Delivery</span>
                         <strong>
-                            ${escapeHtml(order.delivery || "Standard Delivery")}
+                            ${escapeHtml(order.delivery)}
                         </strong>
                     </div>
-
 
                     <div class="order-info-row">
                         <span>Items</span>
                         <strong>
-                            ${escapeHtml(order.items || "Shopping order")}
+                            ${escapeHtml(order.items)}
                         </strong>
                     </div>
-
 
                     <div class="order-info-row">
                         <span>Last Update</span>
                         <strong>
-                            ${escapeHtml(order.lastUpdate || "Awaiting update")}
+                            ${escapeHtml(order.lastUpdate)}
                         </strong>
                     </div>
 
@@ -263,15 +202,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="tracking-current">
 
-                    <strong>
-                        Current Status
-                    </strong>
+                    <strong>Current Status</strong>
 
                     <p>
-                        ${escapeHtml(
-                            order.notes ||
-                            "Your order is currently being processed."
-                        )}
+                        ${escapeHtml(order.notes)}
                     </p>
 
                 </div>
@@ -279,9 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="tracking-progress-wrapper">
 
-                    <h4>
-                        Order Progress
-                    </h4>
+                    <h4>Order Progress</h4>
 
                     ${buildProgress(order.status)}
 
@@ -290,9 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="tracking-help">
 
-                    <p>
-                        Need help with your order?
-                    </p>
+                    <p>Need help with your order?</p>
 
                     <a
                         href="https://wa.me/26876786258"
@@ -307,45 +237,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
             </div>
-
         `;
 
-
-        // Scroll the result into view on smaller screens.
-        setTimeout(() => {
-
-            trackingResult.scrollIntoView({
-                behavior: "smooth",
-                block: "nearest"
-            });
-
-        }, 100);
-
+        trackingResult.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
     }
 
 
-    // --------------------------------------------------------
-    // SHOW ERROR
-    // --------------------------------------------------------
+    function showTrackingError(message) {
 
-    function showError() {
+        if (!trackingResult) return;
 
         trackingResult.innerHTML = `
-
             <div class="tracking-error">
 
                 <strong>
-                    Order not found
+                    ${escapeHtml(message)}
                 </strong>
 
                 <p>
-                    We could not find that GCR order number.
-                    Please check the number and try again.
-                </p>
-
-                <p>
-                    Your order number should look like:
-                    <strong>GCR-1001</strong>
+                    Please check your GCR order number.
                 </p>
 
                 <a
@@ -359,139 +272,268 @@ document.addEventListener("DOMContentLoaded", () => {
                 </a>
 
             </div>
-
         `;
-
     }
 
-
-    // --------------------------------------------------------
-    // SHOW EMPTY SEARCH MESSAGE
-    // --------------------------------------------------------
-
-    function showEmptyMessage() {
-
-        trackingResult.innerHTML = `
-
-            <div class="tracking-error">
-
-                Please enter your GCR order number.
-
-            </div>
-
-        `;
-
-    }
-
-
-    // --------------------------------------------------------
-    // FIND ORDER
-    // --------------------------------------------------------
 
     function trackOrder() {
 
-        if (!trackingNumber || !trackingResult) {
-            return;
-        }
-
+        if (!trackingNumber || !trackingResult) return;
 
         const number = cleanOrderNumber(
             trackingNumber.value
         );
 
-
         if (!number) {
-
-            showEmptyMessage();
-
-            return;
-
-        }
-
-
-        // ----------------------------------------------------
-        // CHECK LOCAL ORDERS
-        // ----------------------------------------------------
-
-        let storedOrders = {};
-
-        try {
-
-            storedOrders = JSON.parse(
-                localStorage.getItem("gcrOrders") || "{}"
+            showTrackingError(
+                "Please enter your GCR order number."
             );
-
-        } catch (error) {
-
-            storedOrders = {};
-
+            return;
         }
 
+        const orders = getOrders();
+        const order = orders[number];
 
-        // ----------------------------------------------------
-        // FIND ORDER
-        // ----------------------------------------------------
-
-        const order =
-            storedOrders[number] ||
-            demoOrders[number];
-
-
-        if (order) {
-
-            showOrder(order);
-
-        } else {
-
-            showError();
-
+        if (!order) {
+            showTrackingError("Order not found.");
+            return;
         }
 
+        showOrder(order);
     }
 
 
-    // --------------------------------------------------------
-    // TRACK BUTTON
-    // --------------------------------------------------------
-
     if (trackButton) {
-
         trackButton.addEventListener(
             "click",
             trackOrder
         );
-
     }
 
 
-    // --------------------------------------------------------
-    // ENTER KEY
-    // --------------------------------------------------------
-
     if (trackingNumber) {
-
         trackingNumber.addEventListener(
             "keydown",
             event => {
 
                 if (event.key === "Enter") {
-
                     event.preventDefault();
-
                     trackOrder();
-
                 }
 
             }
         );
-
     }
 
 
-    // --------------------------------------------------------
-    // AUTO-TEST DEMO ORDER
-    // --------------------------------------------------------
-    // The customer can type GCR-1001 to test tracking.
-    // --------------------------------------------------------
+    // ========================================================
+    // ADMIN ORDER MANAGER
+    // ========================================================
+
+    const adminForm =
+        document.getElementById("adminOrderForm");
+
+    const adminMessage =
+        document.getElementById("adminMessage");
+
+    const adminOrdersList =
+        document.getElementById("adminOrdersList");
+
+
+    function showAdminMessage(message, success = true) {
+
+        if (!adminMessage) return;
+
+        adminMessage.textContent = message;
+
+        adminMessage.className =
+            success
+                ? "admin-message success"
+                : "admin-message error";
+    }
+
+
+    function renderAdminOrders() {
+
+        if (!adminOrdersList) return;
+
+        const orders = getOrders();
+        const keys = Object.keys(orders);
+
+        if (!keys.length) {
+
+            adminOrdersList.innerHTML =
+                "No orders saved yet.";
+
+            return;
+        }
+
+
+        adminOrdersList.innerHTML = keys.map(key => {
+
+            const order = orders[key];
+
+            return `
+                <div class="admin-order-item">
+
+                    <div>
+                        <strong>
+                            ${escapeHtml(order.orderNumber)}
+                        </strong>
+
+                        <span>
+                            ${escapeHtml(order.customer)}
+                        </span>
+                    </div>
+
+                    <div>
+                        <span>
+                            ${escapeHtml(order.status)}
+                        </span>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="admin-delete-button"
+                        data-order="${escapeHtml(order.orderNumber)}">
+
+                        Delete
+
+                    </button>
+
+                </div>
+            `;
+
+        }).join("");
+
+
+        adminOrdersList
+            .querySelectorAll(".admin-delete-button")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const number =
+                            button.dataset.order;
+
+                        const orders = getOrders();
+
+                        delete orders[number];
+
+                        saveOrders(orders);
+
+                        renderAdminOrders();
+
+                        showAdminMessage(
+                            `${number} deleted.`
+                        );
+
+                    }
+                );
+
+            });
+    }
+
+
+    if (adminForm) {
+
+        adminForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+
+                const orderNumber =
+                    cleanOrderNumber(
+                        document.getElementById(
+                            "adminOrderNumber"
+                        ).value
+                    );
+
+
+                if (!/^GCR-\d+$/.test(orderNumber)) {
+
+                    showAdminMessage(
+                        "Order number must look like GCR-1002.",
+                        false
+                    );
+
+                    return;
+                }
+
+
+                const order = {
+
+                    orderNumber,
+
+                    customer:
+                        document.getElementById(
+                            "adminCustomer"
+                        ).value.trim(),
+
+                    orderDate:
+                        document.getElementById(
+                            "adminOrderDate"
+                        ).value,
+
+                    status:
+                        document.getElementById(
+                            "adminStatus"
+                        ).value,
+
+                    payment:
+                        document.getElementById(
+                            "adminPayment"
+                        ).value,
+
+                    delivery:
+                        document.getElementById(
+                            "adminDelivery"
+                        ).value,
+
+                    items:
+                        document.getElementById(
+                            "adminItems"
+                        ).value.trim() ||
+                        "Shopping order",
+
+                    lastUpdate:
+                        document.getElementById(
+                            "adminLastUpdate"
+                        ).value.trim() ||
+                        "Order updated",
+
+                    notes:
+                        document.getElementById(
+                            "adminNotes"
+                        ).value.trim() ||
+                        "Your order has been updated."
+
+                };
+
+
+                const orders = getOrders();
+
+                orders[orderNumber] = order;
+
+                saveOrders(orders);
+
+                showAdminMessage(
+                    `${orderNumber} saved successfully.`
+                );
+
+                adminForm.reset();
+
+                renderAdminOrders();
+
+            }
+        );
+    }
+
+
+    renderAdminOrders();
 
 });

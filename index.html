@@ -585,6 +585,122 @@
 
 </section>
 
+
+<!-- ADMIN ORDER MANAGER -->
+<section class="section admin-section" id="admin">
+    <div class="container">
+        <div class="section-heading">
+            <span class="eyebrow">ADMIN</span>
+            <h2>Order Manager</h2>
+            <p>
+                Manage Global Cart Runner orders and update their
+                tracking status.
+            </p>
+        </div>
+
+        <div class="admin-card">
+
+            <form id="adminOrderForm">
+
+                <div class="admin-grid">
+
+                    <div class="form-group">
+                        <label for="adminOrderNumber">GCR Order Number</label>
+                        <input type="text"
+                               id="adminOrderNumber"
+                               placeholder="Example: GCR-1002"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCustomer">Customer Name</label>
+                        <input type="text"
+                               id="adminCustomer"
+                               placeholder="Customer name"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminOrderDate">Order Date</label>
+                        <input type="date"
+                               id="adminOrderDate"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminStatus">Order Status</label>
+                        <select id="adminStatus">
+                            <option>Order Received</option>
+                            <option>Payment Pending</option>
+                            <option>Payment Received</option>
+                            <option>Order Placed</option>
+                            <option>Processing</option>
+                            <option>Shipped</option>
+                            <option>Arrived in Eswatini</option>
+                            <option>Out for Delivery</option>
+                            <option>Delivered</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPayment">Payment Status</label>
+                        <select id="adminPayment">
+                            <option>Pending</option>
+                            <option>Received</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminDelivery">Delivery Preference</label>
+                        <select id="adminDelivery">
+                            <option>Standard Delivery</option>
+                            <option>Express Delivery</option>
+                            <option>Collection</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminItems">Order / Items</label>
+                        <input type="text"
+                               id="adminItems"
+                               placeholder="Example: SHEIN clothing order">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminLastUpdate">Last Update</label>
+                        <input type="text"
+                               id="adminLastUpdate"
+                               placeholder="Example: Payment received">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="adminNotes">Customer Update / Notes</label>
+                    <textarea id="adminNotes"
+                              rows="4"
+                              placeholder="Message the customer should see when tracking the order..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Save / Update Order
+                </button>
+
+            </form>
+
+            <div id="adminMessage" class="admin-message"></div>
+
+            <div class="admin-orders">
+                <h3>Saved Orders</h3>
+                <div id="adminOrdersList">
+                    No orders saved yet.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 </main>
 
 
