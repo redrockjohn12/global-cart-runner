@@ -1,31 +1,33 @@
-// Global Cart Runner
-// Website functionality
+// ============================================================
+// GLOBAL CART RUNNER
+// Website functionality + Order Tracking V2
+// ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* MOBILE MENU */
+    // --------------------------------------------------------
+    // MOBILE MENU
+    // --------------------------------------------------------
 
     const menuToggle = document.getElementById("menuToggle");
     const mainNav = document.getElementById("mainNav");
 
     if (menuToggle && mainNav) {
-
         menuToggle.addEventListener("click", () => {
             mainNav.classList.toggle("open");
         });
 
         mainNav.querySelectorAll("a").forEach(link => {
-
             link.addEventListener("click", () => {
                 mainNav.classList.remove("open");
             });
-
         });
-
     }
 
 
-    /* CURRENT YEAR */
+    // --------------------------------------------------------
+    // CURRENT YEAR
+    // --------------------------------------------------------
 
     const currentYear = document.getElementById("currentYear");
 
@@ -34,33 +36,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* ORDER TRACKING */
+    // --------------------------------------------------------
+    // ORDER TRACKING V2
+    // --------------------------------------------------------
 
     const trackButton = document.getElementById("trackButton");
     const trackingNumber = document.getElementById("trackingNumber");
     const trackingResult = document.getElementById("trackingResult");
 
 
-    // Demo tracking records.
-    // The owner can add/update orders through the Order Manager
-    // version of the website later when a real online database is added.
+    // --------------------------------------------------------
+    // ORDER STATUS SYSTEM
+    // --------------------------------------------------------
+
+    const orderStatuses = [
+        "Order Received",
+        "Payment Pending",
+        "Payment Received",
+        "Order Placed",
+        "Processing",
+        "Shipped",
+        "Arrived in Eswatini",
+        "Out for Delivery",
+        "Delivered"
+    ];
+
+
+    // --------------------------------------------------------
+    // DEMO ORDER
+    // --------------------------------------------------------
+    // This allows GCR-1001 to be tested on the live website.
+    // Real online database integration can be added later.
+    // --------------------------------------------------------
 
     const demoOrders = {
 
         "GCR-1001": {
             orderNumber: "GCR-1001",
+            customer: "Demo Customer",
             status: "Order Received",
             payment: "Pending",
             delivery: "Standard Delivery",
-            lastUpdate: "Order received"
+            lastUpdate: "Order received",
+            orderDate: "14 September 2026",
+            items: "Shopping order",
+            notes: "Your order has been received by Global Cart Runner."
         }
 
     };
 
 
+    // --------------------------------------------------------
+    // CLEAN ORDER NUMBER
+    // --------------------------------------------------------
+
     function cleanOrderNumber(value) {
 
-        return value
+        return String(value)
             .trim()
             .toUpperCase()
             .replace(/\s+/g, "");
@@ -68,34 +100,132 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // --------------------------------------------------------
+    // ESCAPE HTML
+    // --------------------------------------------------------
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // --------------------------------------------------------
+    // GET STATUS NUMBER
+    // --------------------------------------------------------
+
+    function getStatusIndex(status) {
+
+        const index = orderStatuses.indexOf(status);
+
+        return index >= 0 ? index : 0;
+
+    }
+
+
+    // --------------------------------------------------------
+    // BUILD PROGRESS TRACKER
+    // --------------------------------------------------------
+
+    function buildProgress(status) {
+
+        const currentIndex = getStatusIndex(status);
+
+        return `
+            <div class="tracking-progress">
+
+                ${orderStatuses.map((item, index) => {
+
+                    let className = "";
+
+                    if (index < currentIndex) {
+                        className = "completed";
+                    }
+
+                    if (index === currentIndex) {
+                        className = "active";
+                    }
+
+                    return `
+                        <div class="tracking-step ${className}">
+
+                            <div class="tracking-step-number">
+                                ${index + 1}
+                            </div>
+
+                            <div class="tracking-step-label">
+                                ${escapeHtml(item)}
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("")}
+
+            </div>
+        `;
+
+    }
+
+
+    // --------------------------------------------------------
+    // SHOW ORDER
+    // --------------------------------------------------------
+
     function showOrder(order) {
 
+        const statusIndex = getStatusIndex(order.status);
+
         trackingResult.innerHTML = `
+
             <div class="order-result">
 
                 <div class="order-result-header">
 
-                    <h3>
-                        ${escapeHtml(order.orderNumber)}
-                    </h3>
+                    <div>
+                        <span class="tracking-label">
+                            GLOBAL CART RUNNER
+                        </span>
 
-                    <p>
-                        Global Cart Runner Order
-                    </p>
+                        <h3>
+                            ${escapeHtml(order.orderNumber)}
+                        </h3>
+
+                        <p>
+                            Order Tracking
+                        </p>
+                    </div>
+
+                    <span class="status-pill">
+                        ${escapeHtml(order.status)}
+                    </span>
 
                 </div>
+
 
                 <div class="order-info">
 
                     <div class="order-info-row">
-                        <span>Status</span>
-
+                        <span>Customer</span>
                         <strong>
-                            <span class="status-pill">
-                                ${escapeHtml(order.status)}
-                            </span>
+                            ${escapeHtml(order.customer || "Customer")}
                         </strong>
                     </div>
+
+
+                    <div class="order-info-row">
+                        <span>Order Date</span>
+                        <strong>
+                            ${escapeHtml(order.orderDate || "Not available")}
+                        </strong>
+                    </div>
+
 
                     <div class="order-info-row">
                         <span>Payment</span>
@@ -104,12 +234,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         </strong>
                     </div>
 
+
                     <div class="order-info-row">
                         <span>Delivery</span>
                         <strong>
                             ${escapeHtml(order.delivery || "Standard Delivery")}
                         </strong>
                     </div>
+
+
+                    <div class="order-info-row">
+                        <span>Items</span>
+                        <strong>
+                            ${escapeHtml(order.items || "Shopping order")}
+                        </strong>
+                    </div>
+
 
                     <div class="order-info-row">
                         <span>Last Update</span>
@@ -120,85 +260,166 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </div>
 
+
+                <div class="tracking-current">
+
+                    <strong>
+                        Current Status
+                    </strong>
+
+                    <p>
+                        ${escapeHtml(
+                            order.notes ||
+                            "Your order is currently being processed."
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="tracking-progress-wrapper">
+
+                    <h4>
+                        Order Progress
+                    </h4>
+
+                    ${buildProgress(order.status)}
+
+                </div>
+
+
+                <div class="tracking-help">
+
+                    <p>
+                        Need help with your order?
+                    </p>
+
+                    <a
+                        href="https://wa.me/26876786258"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-primary">
+
+                        Contact Us on WhatsApp
+
+                    </a>
+
+                </div>
+
             </div>
+
         `;
+
+
+        // Scroll the result into view on smaller screens.
+        setTimeout(() => {
+
+            trackingResult.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        }, 100);
 
     }
 
 
+    // --------------------------------------------------------
+    // SHOW ERROR
+    // --------------------------------------------------------
+
     function showError() {
 
         trackingResult.innerHTML = `
+
             <div class="tracking-error">
 
-                <strong>Order not found.</strong>
+                <strong>
+                    Order not found
+                </strong>
 
                 <p>
-                    Please check your GCR order number and try again.
-                    If you still need help, contact Global Cart Runner
-                    on WhatsApp.
+                    We could not find that GCR order number.
+                    Please check the number and try again.
                 </p>
 
-                <br>
+                <p>
+                    Your order number should look like:
+                    <strong>GCR-1001</strong>
+                </p>
 
                 <a
                     href="https://wa.me/26876786258"
                     target="_blank"
                     rel="noopener"
                     class="btn btn-primary">
+
                     Contact Us on WhatsApp
+
                 </a>
 
             </div>
+
         `;
 
     }
 
 
-    function escapeHtml(value) {
+    // --------------------------------------------------------
+    // SHOW EMPTY SEARCH MESSAGE
+    // --------------------------------------------------------
 
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+    function showEmptyMessage() {
+
+        trackingResult.innerHTML = `
+
+            <div class="tracking-error">
+
+                Please enter your GCR order number.
+
+            </div>
+
+        `;
 
     }
 
 
+    // --------------------------------------------------------
+    // FIND ORDER
+    // --------------------------------------------------------
+
     function trackOrder() {
+
+        if (!trackingNumber || !trackingResult) {
+            return;
+        }
+
 
         const number = cleanOrderNumber(
             trackingNumber.value
         );
 
+
         if (!number) {
 
-            trackingResult.innerHTML = `
-                <div class="tracking-error">
-                    Please enter your GCR order number.
-                </div>
-            `;
+            showEmptyMessage();
 
             return;
+
         }
 
 
-        /*
-         * First check locally stored orders.
-         * This keeps compatibility with the previous
-         * Tracking V1 system.
-         */
+        // ----------------------------------------------------
+        // CHECK LOCAL ORDERS
+        // ----------------------------------------------------
 
         let storedOrders = {};
 
         try {
 
-            storedOrders =
-                JSON.parse(
-                    localStorage.getItem("gcrOrders") || "{}"
-                );
+            storedOrders = JSON.parse(
+                localStorage.getItem("gcrOrders") || "{}"
+            );
 
         } catch (error) {
 
@@ -206,6 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+
+        // ----------------------------------------------------
+        // FIND ORDER
+        // ----------------------------------------------------
 
         const order =
             storedOrders[number] ||
@@ -225,6 +450,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // --------------------------------------------------------
+    // TRACK BUTTON
+    // --------------------------------------------------------
+
     if (trackButton) {
 
         trackButton.addEventListener(
@@ -235,6 +464,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // --------------------------------------------------------
+    // ENTER KEY
+    // --------------------------------------------------------
+
     if (trackingNumber) {
 
         trackingNumber.addEventListener(
@@ -242,12 +475,23 @@ document.addEventListener("DOMContentLoaded", () => {
             event => {
 
                 if (event.key === "Enter") {
+
+                    event.preventDefault();
+
                     trackOrder();
+
                 }
 
             }
         );
 
     }
+
+
+    // --------------------------------------------------------
+    // AUTO-TEST DEMO ORDER
+    // --------------------------------------------------------
+    // The customer can type GCR-1001 to test tracking.
+    // --------------------------------------------------------
 
 });
