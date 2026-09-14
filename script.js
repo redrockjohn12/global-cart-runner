@@ -1,18 +1,253 @@
-const WA_NUMBER="26876786258", RUNNER_RATE=0.30, STORAGE_KEY="gcr_orders_v1";
-const statuses=["Quote Requested","Quote Confirmed","Payment Pending","Payment Received","Order Placed","Processing","Shipped","Arrived in Eswatini","Out for Delivery","Delivered"];
-const $=id=>document.getElementById(id), money=n=>Number(n||0).toFixed(2);
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
-function getOrders(){const raw=localStorage.getItem(STORAGE_KEY);if(raw)return JSON.parse(raw);const demo={"GCR-1001":{orderNumber:"GCR-1001",customer:"Demo Customer",store:"SHEIN",paymentStatus:"Payment Received",status:"Processing",delivery:"Standard delivery",updated:"Demo order for testing",note:"This is a demo order. Replace it with a real customer order."}};localStorage.setItem(STORAGE_KEY,JSON.stringify(demo));return demo;}
-function saveOrders(o){localStorage.setItem(STORAGE_KEY,JSON.stringify(o));}
-function calculate(){const subtotal=(Number($("itemPrice").value)||0)*(Number($("quantity").value)||1),fee=subtotal*RUNNER_RATE,shipping=Number($("shippingFee").value)||0;$("subtotal").textContent=money(subtotal);$("runnerFee").textContent=money(fee);$("shippingDisplay").textContent=money(shipping);$("estimatedTotal").textContent=money(subtotal+fee+shipping);}
-["itemPrice","quantity","shippingFee"].forEach(id=>$(id).addEventListener("input",calculate));calculate();
-$("quoteForm").addEventListener("submit",e=>{e.preventDefault();const subtotal=(Number($("itemPrice").value)||0)*(Number($("quantity").value)||1),fee=subtotal*RUNNER_RATE,shipping=Number($("shippingFee").value)||0,total=subtotal+fee+shipping;const text=`GLOBAL CART RUNNER\nQUOTE REQUEST\n\nCustomer Name: ${$("fullName").value.trim()}\nCustomer WhatsApp: ${$("customerWhatsApp").value.trim()}\nStore: ${$("store").value}\nProduct: ${$("productName").value.trim()}\nProduct Link: ${$("productLink").value.trim()||"Not provided"}\nQuantity: ${$("quantity").value}\nItem Subtotal: ${money(subtotal)}\nRunner Fee (30%): ${money(fee)}\nShipping: ${money(shipping)}\nEstimated Total: ${money(total)}\nDelivery Preference: ${$("deliveryPreference").value}\nAdditional Notes: ${$("notes").value.trim()||"None"}\n\nPlease confirm the final quote and next steps.`;window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,"_blank");});
-function renderTracking(order){const box=$("trackingResult");if(!order){box.innerHTML='<div class="tracking-card error"><b>Order not found.</b><p>Check the GCR order number and try again.</p></div>';return;}const idx=Math.max(0,statuses.indexOf(order.status));const timeline=statuses.map((s,i)=>`<li class="${i<=idx?'done':''}"><span>${s}</span>${i===idx?'<small>Current status</small>':''}</li>`).join("");box.innerHTML=`<div class="tracking-card"><div class="tracking-head"><div><h3>${escapeHtml(order.orderNumber)}</h3><p>${escapeHtml(order.customer||"")}</p></div><span class="status">${escapeHtml(order.status)}</span></div><div class="tracking-info"><p><b>Store</b><br>${escapeHtml(order.store||"")}</p><p><b>Payment</b><br>${escapeHtml(order.paymentStatus||"")}</p><p><b>Delivery</b><br>${escapeHtml(order.delivery||"")}</p><p><b>Last update</b><br>${escapeHtml(order.updated||"")}</p></div>${order.note?`<p><b>Note:</b> ${escapeHtml(order.note)}</p>`:""}<ol class="timeline">${timeline}</ol></div>`;}
-$("trackingForm").addEventListener("submit",e=>{e.preventDefault();const key=$("trackingNumber").value.trim().toUpperCase();renderTracking(getOrders()[key]);});
-function renderAdmin(){const orders=getOrders();$("adminList").innerHTML=Object.values(orders).sort((a,b)=>a.orderNumber.localeCompare(b.orderNumber)).map(o=>`<div class="admin-order"><b>${escapeHtml(o.orderNumber)}</b> — ${escapeHtml(o.customer||"")}<br><span>${escapeHtml(o.status)} • ${escapeHtml(o.paymentStatus||"")}</span><br><button class="btn secondary" onclick="loadOrder('${escapeHtml(o.orderNumber)}')">Edit</button> <button class="btn secondary" onclick="viewOrder('${escapeHtml(o.orderNumber)}')">View</button></div>`).join("");}
-window.loadOrder=num=>{const o=getOrders()[num];if(!o)return;$("adminOrder").value=o.orderNumber;$("adminCustomer").value=o.customer||"";$("adminStore").value=o.store||"";$("adminPayment").value=o.paymentStatus||"Payment Pending";$("adminStatus").value=o.status||"Quote Requested";$("adminDelivery").value=o.delivery||"Standard delivery";$("adminUpdate").value=o.updated||"";$("adminNote").value=o.note||"";$("adminPanel").classList.remove("hidden");};
-window.viewOrder=num=>{$("trackingNumber").value=num;document.querySelector("#tracking").scrollIntoView({behavior:"smooth"});renderTracking(getOrders()[num]);};
-$("adminForm").addEventListener("submit",e=>{e.preventDefault();const num=$("adminOrder").value.trim().toUpperCase();if(!/^GCR-\d{4,}$/.test(num)){alert("Use an order number like GCR-1002.");return;}const orders=getOrders();orders[num]={orderNumber:num,customer:$("adminCustomer").value.trim(),store:$("adminStore").value.trim(),paymentStatus:$("adminPayment").value,status:$("adminStatus").value,delivery:$("adminDelivery").value.trim(),updated:$("adminUpdate").value.trim()||new Date().toLocaleString(),note:$("adminNote").value.trim(),created:orders[num]?.created||new Date().toISOString()};saveOrders(orders);renderAdmin();alert(`${num} saved.`);});
-$("showAdmin").addEventListener("click",()=>{$("adminPanel").classList.toggle("hidden");renderAdmin();});$("resetDemo").addEventListener("click",()=>{if(confirm("Reset the demo orders stored in this browser?")){localStorage.removeItem(STORAGE_KEY);renderAdmin();alert("Demo order data reset.");}});
-$("menuBtn").addEventListener("click",()=>$("navLinks").classList.toggle("open"));document.querySelectorAll("#navLinks a").forEach(a=>a.addEventListener("click",()=>$("navLinks").classList.remove("open")));
-renderAdmin();
+// Global Cart Runner
+// Website functionality
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* MOBILE MENU */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+
+    if (menuToggle && mainNav) {
+
+        menuToggle.addEventListener("click", () => {
+            mainNav.classList.toggle("open");
+        });
+
+        mainNav.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+                mainNav.classList.remove("open");
+            });
+
+        });
+
+    }
+
+
+    /* CURRENT YEAR */
+
+    const currentYear = document.getElementById("currentYear");
+
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+    }
+
+
+    /* ORDER TRACKING */
+
+    const trackButton = document.getElementById("trackButton");
+    const trackingNumber = document.getElementById("trackingNumber");
+    const trackingResult = document.getElementById("trackingResult");
+
+
+    // Demo tracking records.
+    // The owner can add/update orders through the Order Manager
+    // version of the website later when a real online database is added.
+
+    const demoOrders = {
+
+        "GCR-1001": {
+            orderNumber: "GCR-1001",
+            status: "Order Received",
+            payment: "Pending",
+            delivery: "Standard Delivery",
+            lastUpdate: "Order received"
+        }
+
+    };
+
+
+    function cleanOrderNumber(value) {
+
+        return value
+            .trim()
+            .toUpperCase()
+            .replace(/\s+/g, "");
+
+    }
+
+
+    function showOrder(order) {
+
+        trackingResult.innerHTML = `
+            <div class="order-result">
+
+                <div class="order-result-header">
+
+                    <h3>
+                        ${escapeHtml(order.orderNumber)}
+                    </h3>
+
+                    <p>
+                        Global Cart Runner Order
+                    </p>
+
+                </div>
+
+                <div class="order-info">
+
+                    <div class="order-info-row">
+                        <span>Status</span>
+
+                        <strong>
+                            <span class="status-pill">
+                                ${escapeHtml(order.status)}
+                            </span>
+                        </strong>
+                    </div>
+
+                    <div class="order-info-row">
+                        <span>Payment</span>
+                        <strong>
+                            ${escapeHtml(order.payment || "Pending")}
+                        </strong>
+                    </div>
+
+                    <div class="order-info-row">
+                        <span>Delivery</span>
+                        <strong>
+                            ${escapeHtml(order.delivery || "Standard Delivery")}
+                        </strong>
+                    </div>
+
+                    <div class="order-info-row">
+                        <span>Last Update</span>
+                        <strong>
+                            ${escapeHtml(order.lastUpdate || "Awaiting update")}
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+    }
+
+
+    function showError() {
+
+        trackingResult.innerHTML = `
+            <div class="tracking-error">
+
+                <strong>Order not found.</strong>
+
+                <p>
+                    Please check your GCR order number and try again.
+                    If you still need help, contact Global Cart Runner
+                    on WhatsApp.
+                </p>
+
+                <br>
+
+                <a
+                    href="https://wa.me/26876786258"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-primary">
+                    Contact Us on WhatsApp
+                </a>
+
+            </div>
+        `;
+
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function trackOrder() {
+
+        const number = cleanOrderNumber(
+            trackingNumber.value
+        );
+
+        if (!number) {
+
+            trackingResult.innerHTML = `
+                <div class="tracking-error">
+                    Please enter your GCR order number.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        /*
+         * First check locally stored orders.
+         * This keeps compatibility with the previous
+         * Tracking V1 system.
+         */
+
+        let storedOrders = {};
+
+        try {
+
+            storedOrders =
+                JSON.parse(
+                    localStorage.getItem("gcrOrders") || "{}"
+                );
+
+        } catch (error) {
+
+            storedOrders = {};
+
+        }
+
+
+        const order =
+            storedOrders[number] ||
+            demoOrders[number];
+
+
+        if (order) {
+
+            showOrder(order);
+
+        } else {
+
+            showError();
+
+        }
+
+    }
+
+
+    if (trackButton) {
+
+        trackButton.addEventListener(
+            "click",
+            trackOrder
+        );
+
+    }
+
+
+    if (trackingNumber) {
+
+        trackingNumber.addEventListener(
+            "keydown",
+            event => {
+
+                if (event.key === "Enter") {
+                    trackOrder();
+                }
+
+            }
+        );
+
+    }
+
+});

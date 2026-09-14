@@ -1,29 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content="Global Cart Runner - shop global, live local. Order tracking and delivery in Eswatini.">
-  <title>Global Cart Runner | Shop Global, Live Local</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Global Cart Runner | Shop Globally. We Bring It Home.</title>
+
+    <meta name="description"
+          content="Global Cart Runner helps customers in Eswatini shop from international and South African stores and receive their orders in Eswatini.">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<header class="navbar">
-  <a class="brand" href="#home" aria-label="Global Cart Runner home"><span class="brand-mark">🛒</span><span><b>GLOBAL</b><strong>CART</strong><b>RUNNER</b></span></a>
-  <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-  <nav id="navLinks"><a href="#home">Home</a><a href="#services">Services</a><a href="#how">How It Works</a><a href="#stores">Shop With Us</a><a href="#tracking">Track Order</a><a href="#contact">Contact</a><a class="nav-whatsapp" href="https://wa.me/26876786258" target="_blank" rel="noopener">WhatsApp Us ↗</a></nav>
+
+<header class="site-header">
+    <div class="container nav-container">
+
+        <a href="#home" class="brand">
+            <img src="assets/global-cart-runner-logo.png"
+                 alt="Global Cart Runner logo">
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+            ☰
+        </button>
+
+        <nav id="mainNav">
+            <a href="#home">Home</a>
+            <a href="#stores">Shop</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#tracking">Track Order</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </div>
 </header>
+
+
 <main>
-<section class="hero" id="home"><div class="hero-copy"><p class="eyebrow">🌍 GLOBAL SHOPPING • 🇸🇿 ESWATINI DELIVERY</p><h1>Shop Global.<br><span>Live Local.</span></h1><p class="lead">We help you order from international stores and bring your favourite products to Eswatini — safely, simply and stress-free.</p><div class="hero-actions"><a class="btn primary" href="#quote">🛒 Start Shopping</a><a class="btn secondary" href="#tracking">🔎 Track My Order</a></div><div class="hero-points"><span>✓ Secure ordering</span><span>✓ Weekly processing</span><span>✓ Optional delivery</span></div></div><div class="hero-art"><div class="globe">🌍</div><div class="parcel">📦</div><div class="plane">✈️</div><div class="cart">🛒</div></div></section>
-<section class="section" id="services"><div class="section-heading"><p class="eyebrow">WHAT WE DO</p><h2>Our Services</h2><p>We handle the hard part so you can enjoy hassle-free international shopping.</p></div><div class="cards"><article class="card"><div class="icon">✈️</div><h3>International Orders</h3><p>Order products from supported global stores.</p></article><article class="card"><div class="icon">🛡️</div><h3>Secure Ordering</h3><p>We make the ordering process simple and organised.</p></article><article class="card"><div class="icon">📅</div><h3>Weekly Processing</h3><p>Orders are submitted every Saturday.</p></article><article class="card"><div class="icon">🚚</div><h3>Delivery Options</h3><p>Choose pickup or optional door-to-door delivery.</p></article><article class="card"><div class="icon">🔎</div><h3>Order Tracking</h3><p>Track your order using your GCR order number.</p></article></div></section>
-<section class="stores section" id="stores"><div class="section-heading"><p class="eyebrow">SHOP FROM</p><h2>Top Global & Local Stores</h2><p>Send us a screenshot or link to the item you want.</p></div><div class="store-grid"><div>SHEIN</div><div>AliExpress</div><div>Alibaba</div><div>amazon</div><div>Banggood</div><div>mr price</div><div>takealot<span>.com</span></div><div>makro</div></div></section>
-<section class="how section" id="how"><div class="section-heading light"><p class="eyebrow">SIMPLE PROCESS</p><h2>How It Works</h2></div><div class="steps"><div class="step"><b>1</b><h3>Send a Screenshot</h3><p>Send us a screenshot or link to the item you want.</p></div><div class="step"><b>2</b><h3>Get Your Quote</h3><p>We confirm the item price, shipping fee and 30% runner fee.</p></div><div class="step"><b>3</b><h3>Pay & We Order</h3><p>Pay after confirmation using MTN Mobile Money.</p></div><div class="step"><b>4</b><h3>Track & Receive</h3><p>Use your GCR number to follow the order until delivery.</p></div></div></section>
-<section class="pricing section"><div class="price-box"><div><small>RUNNER FEE</small><strong>30%</strong></div><div><small>ORDER DAY</small><strong>Every Saturday</strong></div><div><small>TOTAL COST</small><strong>Item + Shipping + Runner Fee</strong></div></div><p class="fine-print">Shipping fees depend on the item's weight, size and shipping method. A final quote is confirmed before ordering.</p></section>
-<section class="section payment" id="payment"><div class="section-heading"><p class="eyebrow">PAYMENT</p><h2>Payment Options</h2><p>Only pay after your final quote has been confirmed.</p></div><div class="payment-grid"><article class="payment-card"><div class="icon">📱</div><h3>MTN Mobile Money</h3><p><b>Number:</b> 76786258</p><p><b>Account name:</b> Thandeka Magongo</p><p><b>Reference:</b> Your GCR Order Number</p><p class="small">Send proof of payment on WhatsApp after payment.</p></article><article class="payment-card pending"><div class="icon">🏦</div><h3>Bank Transfer / EFT</h3><p>Banking details will be added later.</p><span>COMING SOON</span></article></div></section>
-<section class="section quote" id="quote"><div class="section-heading"><p class="eyebrow">ORDER REQUEST</p><h2>Get a Quote / Place an Order</h2><p>Fill in the details and we'll prepare a WhatsApp quote request.</p></div><form id="quoteForm" class="quote-form"><div class="two"><label>Full Name<input id="fullName" required></label><label>WhatsApp Number<input id="customerWhatsApp" type="tel" required></label></div><div class="two"><label>Store<select id="store" required><option value="">Select store</option><option>SHEIN</option><option>AliExpress</option><option>Alibaba</option><option>Amazon</option><option>Banggood</option><option>Mr Price</option><option>Takealot</option><option>Makro</option><option>Other</option></select></label><label>Product Name<input id="productName" required></label></div><label>Product Link<input id="productLink" type="url" placeholder="https://..."></label><div class="three"><label>Item Price<input id="itemPrice" type="number" min="0" step="0.01" value="0" required></label><label>Quantity<input id="quantity" type="number" min="1" step="1" value="1" required></label><label>Shipping Fee<input id="shippingFee" type="number" min="0" step="0.01" value="0" required></label></div><label>Delivery Preference<select id="deliveryPreference"><option>Standard delivery</option><option>Collection</option><option>Local delivery</option></select></label><label>Additional Notes<textarea id="notes" rows="4" placeholder="Size, colour, model, or other details..."></textarea></label><div class="calculator"><div><span>Item subtotal</span><strong id="subtotal">0.00</strong></div><div><span>Runner fee (30%)</span><strong id="runnerFee">0.00</strong></div><div><span>Shipping</span><strong id="shippingDisplay">0.00</strong></div><div class="calc-total"><span>Estimated total</span><strong id="estimatedTotal">0.00</strong></div></div><button class="btn primary full" type="submit">Send Quote Request on WhatsApp</button><p class="small">If you have a product screenshot, attach it manually after WhatsApp opens.</p></form></section>
-<section class="section tracking" id="tracking"><div class="section-heading"><p class="eyebrow">ORDER TRACKING</p><h2>Track Your Order</h2><p>Enter the GCR order number given to you by Global Cart Runner.</p></div><form id="trackingForm" class="tracking-form"><input id="trackingNumber" placeholder="Example: GCR-1001" autocomplete="off" required><button class="btn primary" type="submit">Track Order</button></form><div id="trackingResult" class="tracking-result" aria-live="polite"></div></section>
-<section class="section admin" id="admin"><div class="section-heading"><p class="eyebrow">OWNER TOOLS • V1</p><h2>Order Manager</h2><p>This first version is for testing. Orders are stored only in this browser and are not yet a shared online database.</p></div><button class="btn secondary" id="showAdmin">Open Order Manager</button><button class="btn secondary" id="resetDemo">Reset Demo Orders</button><div id="adminPanel" class="admin-panel hidden"><form id="adminForm" class="quote-form"><div class="two"><label>Order Number<input id="adminOrder" placeholder="GCR-1002" required></label><label>Customer Name<input id="adminCustomer" required></label></div><div class="two"><label>Store<input id="adminStore" required></label><label>Payment Status<select id="adminPayment"><option>Payment Pending</option><option>Payment Received</option><option>Not Applicable</option></select></label></div><div class="two"><label>Order Status<select id="adminStatus"><option>Quote Requested</option><option>Quote Confirmed</option><option>Payment Pending</option><option>Payment Received</option><option>Order Placed</option><option>Processing</option><option>Shipped</option><option>Arrived in Eswatini</option><option>Out for Delivery</option><option>Delivered</option></select></label><label>Delivery Preference<input id="adminDelivery" value="Standard delivery"></label></div><label>Last Update<input id="adminUpdate" placeholder="Order updated"></label><label>Tracking / Delivery Note<textarea id="adminNote" rows="3"></textarea></label><button class="btn primary full" type="submit">Save / Update Order</button></form><div id="adminList" class="admin-list"></div></div></section>
-<section class="contact section" id="contact"><div><p class="eyebrow">READY TO SHOP?</p><h2>Let's bring the world closer to you.</h2><p>WhatsApp us and send a screenshot of the product you want.</p></div><a class="btn primary big" href="https://wa.me/26876786258" target="_blank" rel="noopener">💬 WhatsApp: +268 76786258</a></section>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <span class="eyebrow">GLOBAL SHOPPING • ESWATINI DELIVERY</span>
+
+            <h1>
+                Shop Globally.
+                <span>We Bring It Home.</span>
+            </h1>
+
+            <p>
+                Global Cart Runner makes it easier to shop from selected
+                international and South African stores and have your purchases
+                brought to Eswatini.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#stores" class="btn btn-primary">
+                    Start Shopping
+                </a>
+
+                <a href="https://wa.me/26876786258"
+                   class="btn btn-secondary"
+                   target="_blank"
+                   rel="noopener">
+                    Order Through WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="hero-card-icon">🛒</div>
+
+            <h3>Global Cart Runner</h3>
+
+            <p>
+                Choose your store, shop for your items and send your
+                screenshots or product links to us on WhatsApp.
+            </p>
+
+            <div class="hero-mini">
+                <strong>Runner Fee</strong>
+                <span>30%</span>
+            </div>
+
+            <div class="hero-mini">
+                <strong>Orders</strong>
+                <span>Every Saturday</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STORES -->
+<section class="section stores-section" id="stores">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">SHOP WITH US</span>
+
+            <h2>Choose Where You Want To Shop</h2>
+
+            <p>
+                Select a store below to start shopping. When you find the
+                items you want, send us the product screenshots or links
+                through WhatsApp.
+            </p>
+
+        </div>
+
+
+        <div class="stores-grid">
+
+            <!-- SHEIN -->
+            <article class="store-card">
+                <div class="store-icon">👗</div>
+
+                <h3>SHEIN</h3>
+
+                <p>
+                    Fashion, clothing, beauty, accessories and more.
+                </p>
+
+                <a href="https://www.shein.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop SHEIN →
+                </a>
+            </article>
+
+
+            <!-- ALIEXPRESS -->
+            <article class="store-card">
+                <div class="store-icon">🛍️</div>
+
+                <h3>AliExpress</h3>
+
+                <p>
+                    Millions of products from sellers around the world.
+                </p>
+
+                <a href="https://www.aliexpress.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop AliExpress →
+                </a>
+            </article>
+
+
+            <!-- ALIBABA -->
+            <article class="store-card">
+                <div class="store-icon">🏭</div>
+
+                <h3>Alibaba</h3>
+
+                <p>
+                    Wholesale products, suppliers and business sourcing.
+                </p>
+
+                <a href="https://www.alibaba.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Alibaba →
+                </a>
+            </article>
+
+
+            <!-- AMAZON -->
+            <article class="store-card">
+                <div class="store-icon">📦</div>
+
+                <h3>Amazon</h3>
+
+                <p>
+                    Electronics, household products, fashion and more.
+                </p>
+
+                <a href="https://www.amazon.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Amazon →
+                </a>
+            </article>
+
+
+            <!-- BANGGOOD -->
+            <article class="store-card">
+                <div class="store-icon">🔧</div>
+
+                <h3>Banggood</h3>
+
+                <p>
+                    Electronics, gadgets, tools, accessories and more.
+                </p>
+
+                <a href="https://www.banggood.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Banggood →
+                </a>
+            </article>
+
+
+            <!-- MR PRICE -->
+            <article class="store-card">
+                <div class="store-icon">👕</div>
+
+                <h3>Mr Price</h3>
+
+                <p>
+                    Fashion, homeware, sportswear and more.
+                </p>
+
+                <a href="https://www.mrp.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Mr Price →
+                </a>
+            </article>
+
+
+            <!-- TAKEALOT -->
+            <article class="store-card">
+                <div class="store-icon">🛒</div>
+
+                <h3>Takealot</h3>
+
+                <p>
+                    One of South Africa's largest online shopping platforms.
+                </p>
+
+                <a href="https://www.takealot.com/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Takealot →
+                </a>
+            </article>
+
+
+            <!-- MAKRO -->
+            <article class="store-card">
+                <div class="store-icon">🏪</div>
+
+                <h3>Makro</h3>
+
+                <p>
+                    Electronics, homeware, groceries and general merchandise.
+                </p>
+
+                <a href="https://www.makro.co.za/"
+                   class="store-button"
+                   target="_blank"
+                   rel="noopener">
+                    Shop Makro →
+                </a>
+            </article>
+
+        </div>
+
+
+        <div class="shopping-note">
+
+            <strong>💡 How to order:</strong>
+
+            <span>
+                Shop on your chosen store, then send us the product
+                screenshots or links on WhatsApp.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section dark-section" id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading light">
+
+            <span class="eyebrow">SIMPLE PROCESS</span>
+
+            <h2>How Global Cart Runner Works</h2>
+
+            <p>
+                Shopping internationally doesn't have to be complicated.
+            </p>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>Choose A Store</h3>
+                <p>
+                    Select one of our supported shopping platforms above.
+                </p>
+            </div>
+
+
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>Shop</h3>
+                <p>
+                    Find the products you want and save the product
+                    screenshots or links.
+                </p>
+            </div>
+
+
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>Send Us Your Items</h3>
+                <p>
+                    Send the screenshots or product links to us on WhatsApp.
+                </p>
+            </div>
+
+
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <h3>Receive Your Total</h3>
+                <p>
+                    We calculate the item cost, Runner Fee and applicable
+                    shipping/delivery costs.
+                </p>
+            </div>
+
+
+            <div class="step-card">
+                <div class="step-number">05</div>
+                <h3>We Place The Order</h3>
+                <p>
+                    Orders are submitted every Saturday after confirmation.
+                </p>
+            </div>
+
+
+            <div class="step-card">
+                <div class="step-number">06</div>
+                <h3>Track Your Order</h3>
+                <p>
+                    Use your GCR order number to follow your order status.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">PRICING</span>
+
+            <h2>Simple Runner Fee</h2>
+
+            <p>
+                Our Runner Fee is calculated from the value of the items
+                you order.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-card">
+
+            <div class="pricing-main">
+                <span class="pricing-label">RUNNER FEE</span>
+                <strong>30%</strong>
+                <p>of your item subtotal</p>
+            </div>
+
+
+            <div class="pricing-details">
+
+                <div>
+                    <span>Item Price</span>
+                    <strong>Product cost</strong>
+                </div>
+
+                <div>
+                    <span>Runner Fee</span>
+                    <strong>30%</strong>
+                </div>
+
+                <div>
+                    <span>Shipping</span>
+                    <strong>Calculated separately</strong>
+                </div>
+
+                <div>
+                    <span>Ordering Day</span>
+                    <strong>Every Saturday</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="payment-box">
+
+            <h3>Payment Options</h3>
+
+            <div class="payment-option">
+
+                <h4>MTN Mobile Money</h4>
+
+                <p>
+                    <strong>Number:</strong> 76786258
+                </p>
+
+                <p>
+                    <strong>Account Name:</strong> Thandeka Magongo
+                </p>
+
+                <p>
+                    <strong>Reference:</strong> Your GCR Order Number
+                </p>
+
+            </div>
+
+
+            <div class="payment-option coming-soon">
+
+                <h4>Bank / EFT</h4>
+
+                <span>Coming Soon</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRACKING -->
+<section class="section tracking-section" id="tracking">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">ORDER TRACKING</span>
+
+            <h2>Track Your GCR Order</h2>
+
+            <p>
+                Enter your Global Cart Runner order number to check your
+                current order status.
+            </p>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <label for="trackingNumber">
+                GCR Order Number
+            </label>
+
+            <div class="tracking-form">
+
+                <input
+                    type="text"
+                    id="trackingNumber"
+                    placeholder="Example: GCR-1001"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="trackButton">
+                    Track Order
+                </button>
+
+            </div>
+
+
+            <div id="trackingResult" class="tracking-result"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+
+    <div class="container contact-grid">
+
+        <div>
+
+            <span class="eyebrow">READY TO SHOP?</span>
+
+            <h2>
+                Find Your Items.
+                We'll Bring Them Home.
+            </h2>
+
+            <p>
+                Browse one of our supported stores, choose your products and
+                send us the screenshots or links on WhatsApp.
+            </p>
+
+            <a href="https://wa.me/26876786258"
+               class="btn btn-primary whatsapp-button"
+               target="_blank"
+               rel="noopener">
+                📲 Chat With Global Cart Runner
+            </a>
+
+        </div>
+
+
+        <div class="contact-card">
+
+            <h3>Global Cart Runner</h3>
+
+            <p>
+                <strong>WhatsApp</strong>
+            </p>
+
+            <a href="https://wa.me/26876786258"
+               target="_blank"
+               rel="noopener">
+                +268 76786258
+            </a>
+
+            <hr>
+
+            <p>
+                Orders are submitted every Saturday.
+            </p>
+
+            <p>
+                Delivery available in Eswatini.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
 </main>
-<footer><div class="footer-brand">🛒 <b>GLOBAL CART RUNNER</b></div><div class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#quote">Get a Quote</a><a href="#tracking">Track Order</a><a href="#contact">Contact</a></div><p>© 2026 Global Cart Runner. All rights reserved.</p></footer>
+
+
+<footer>
+
+    <div class="container footer-content">
+
+        <div>
+            <strong>Global Cart Runner</strong>
+            <p>Shop Globally. We Bring It Home.</p>
+        </div>
+
+        <div>
+            <p>
+                © <span id="currentYear"></span>
+                Global Cart Runner. All rights reserved.
+            </p>
+        </div>
+
+    </div>
+
+</footer>
+
+
 <script src="script.js"></script>
-</body></html>
+
+</body>
+</html>
