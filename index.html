@@ -1,105 +1,1095 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Global Cart Runner | Shop Globally. We Bring It Home.</title>
+<meta name="description" content="Global Cart Runner - Shop globally and receive your orders in Eswatini.">
 
-    <meta name="description"
-          content="Global Cart Runner helps customers in Eswatini shop from international and South African stores and receive their orders in Eswatini.">
+<title>Global Cart Runner | Shop Global, Live Local</title>
 
-    <link rel="stylesheet" href="styles.css">
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#102b4e;
+    background:#fff;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+}
+
+.navbar{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 15px #00000012;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#102b4e;
+    font-size:17px;
+    line-height:.95;
+}
+
+.brand-mark{
+    font-size:35px;
+}
+
+.brand-text{
+    display:flex;
+    flex-direction:column;
+}
+
+.brand-text strong{
+    color:#ee4b16;
+    font-size:21px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+nav a{
+    color:#102b4e;
+    font-weight:700;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#ee4b16;
+}
+
+.nav-whatsapp{
+    background:#102b4e;
+    color:#fff!important;
+    padding:11px 18px;
+    border-radius:30px;
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.hero{
+    min-height:590px;
+    padding:75px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+    overflow:hidden;
+    background:linear-gradient(120deg,#fff 0%,#f5f9fd 55%,#eaf3fb 100%);
+}
+
+.hero-copy{
+    max-width:650px;
+}
+
+.eyebrow{
+    font-weight:800;
+    letter-spacing:1.2px;
+    color:#ee4b16;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.hero h1{
+    font-size:clamp(52px,8vw,88px);
+    line-height:.95;
+    margin-bottom:25px;
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:#ee4b16;
+}
+
+.lead{
+    font-size:20px;
+    max-width:590px;
+    color:#40536a;
+}
+
+.hero-actions{
+    display:flex;
+    gap:13px;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:30px;
+    padding:12px 20px;
+    display:inline-block;
+    font-weight:800;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.primary{
+    background:#ee4b16;
+    color:white;
+}
+
+.secondary{
+    background:#102b4e;
+    color:white;
+}
+
+.hero-points{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    font-size:13px;
+    font-weight:700;
+}
+
+.hero-art{
+    width:390px;
+    height:390px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#ffc52f;
+    position:relative;
+    box-shadow:0 25px 50px #102b4e25;
+}
+
+.globe{
+    font-size:150px;
+    position:absolute;
+    left:95px;
+    top:105px;
+}
+
+.parcel{
+    font-size:100px;
+    position:absolute;
+    left:45px;
+    bottom:25px;
+}
+
+.plane{
+    font-size:75px;
+    position:absolute;
+    right:15px;
+    top:40px;
+    transform:rotate(-12deg);
+}
+
+.cart{
+    font-size:80px;
+    position:absolute;
+    right:45px;
+    bottom:55px;
+}
+
+.section{
+    padding:85px 7%;
+}
+
+.section-heading{
+    text-align:center;
+    max-width:720px;
+    margin:0 auto 45px;
+}
+
+.section-heading h2{
+    font-size:44px;
+    line-height:1.1;
+    margin-bottom:12px;
+}
+
+.section-heading p:not(.eyebrow){
+    color:#5d6d7d;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.card{
+    padding:28px 20px;
+    text-align:center;
+    border:1px solid #e7edf3;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 10px 25px #102b4e0b;
+}
+
+.icon{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#102b4e;
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    margin:0 auto 15px;
+    border:4px solid #ee4b16;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.card p{
+    font-size:14px;
+    color:#657486;
+}
+
+.stores{
+    background:#f5f7f8;
+}
+
+.store-grid{
+    max-width:1000px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.store-card{
+    min-height:100px;
+    background:white;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:20px;
+    font-size:22px;
+    font-weight:800;
+    color:#111;
+    box-shadow:0 7px 18px #0000000c;
+    transition:.2s;
+}
+
+.store-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px #0002;
+}
+
+.store-card span{
+    color:#1686d9;
+}
+
+.how{
+    background:#102b4e;
+    color:white;
+}
+
+.light .eyebrow{
+    color:#ffc52f;
+}
+
+.light p:not(.eyebrow){
+    color:#d8e4ef;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.step{
+    text-align:center;
+    border-right:1px solid #ffffff30;
+    padding:10px 20px;
+}
+
+.step:last-child{
+    border:0;
+}
+
+.step>b{
+    display:grid;
+    place-items:center;
+    margin:0 auto 18px;
+    width:55px;
+    height:55px;
+    background:#ee4b16;
+    border-radius:50%;
+    font-size:22px;
+}
+
+.step h3{
+    margin-bottom:8px;
+}
+
+.step p{
+    color:#d8e4ef;
+    font-size:14px;
+}
+
+.pricing{
+    padding-top:35px;
+    padding-bottom:35px;
+}
+
+.price-box{
+    max-width:1100px;
+    margin:auto;
+    background:#ffc52f;
+    border-radius:20px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:1fr 1fr 1.5fr;
+    gap:20px;
+    text-align:center;
+}
+
+.price-box div{
+    border-right:1px solid #102b4e30;
+    padding:5px 15px;
+}
+
+.price-box div:last-child{
+    border:0;
+}
+
+.price-box small{
+    display:block;
+    font-weight:800;
+}
+
+.price-box strong{
+    display:block;
+    font-size:25px;
+}
+
+.fine-print{
+    text-align:center;
+    color:#6b7681;
+    font-size:13px;
+    margin-top:15px;
+}
+
+.payment{
+    background:#f5f7f8;
+}
+
+.payment-grid{
+    max-width:900px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.payment-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    border:1px solid #e4eaf0;
+    box-shadow:0 10px 25px #102b4e0b;
+}
+
+.payment-card .icon{
+    margin-bottom:15px;
+}
+
+.payment-card h3{
+    margin-bottom:15px;
+}
+
+.payment-card p{
+    margin:6px 0;
+    color:#536273;
+}
+
+.payment-card .small{
+    font-size:13px;
+    margin-top:15px;
+}
+
+.payment-card.pending span{
+    display:inline-block;
+    margin-top:15px;
+    background:#102b4e;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.tracking{
+    background:#fff;
+}
+
+.tracking-form{
+    max-width:650px;
+    margin:auto;
+    display:flex;
+    gap:12px;
+}
+
+.tracking-form input{
+    flex:1;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid #d7e0e8;
+    border-radius:10px;
+    padding:13px 14px;
+    font-size:16px;
+    color:#102b4e;
+    background:#fff;
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#ee4b16;
+    box-shadow:0 0 0 3px #ee4b1620;
+}
+
+.tracking-result{
+    max-width:850px;
+    margin:30px auto 0;
+}
+
+.tracking-card{
+    border:1px solid #e0e7ee;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 25px #102b4e0b;
+}
+
+.tracking-card.error{
+    text-align:center;
+    border-color:#ee4b16;
+}
+
+.tracking-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.tracking-head h3{
+    font-size:24px;
+}
+
+.status{
+    background:#102b4e;
+    color:white;
+    padding:8px 13px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.tracking-info{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.tracking-info p{
+    background:#f5f7f8;
+    padding:13px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.timeline{
+    list-style:none;
+    margin-top:25px;
+    display:grid;
+    gap:8px;
+}
+
+.timeline li{
+    padding:10px 14px;
+    border-radius:8px;
+    background:#eef2f5;
+    color:#7b8794;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:14px;
+}
+
+.timeline li.done{
+    background:#e8f5ed;
+    color:#145a35;
+    font-weight:bold;
+}
+
+.timeline small{
+    color:#ee4b16;
+}
+
+.admin-section{
+    background:#f5f7f8;
+}
+
+.admin-card{
+    max-width:1050px;
+    margin:auto;
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px #102b4e0b;
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.admin-message{
+    margin-top:15px;
+    font-weight:bold;
+    color:#145a35;
+}
+
+.admin-orders{
+    margin-top:35px;
+}
+
+.admin-orders h3{
+    margin-bottom:15px;
+}
+
+.admin-order-item{
+    border:1px solid #dfe6ec;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.admin-order-item strong{
+    font-size:18px;
+}
+
+.admin-order-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.admin-delete-button{
+    background:#8d1d1d;
+    color:white;
+}
+
+.calculator-section{
+    background:#102b4e;
+    color:white;
+    padding-top:85px;
+    padding-bottom:90px;
+}
+
+.calculator-section .section-heading p:not(.eyebrow){
+    color:#d8e4ef;
+}
+
+.calculator-card{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    color:#102b4e;
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 20px 50px #0004;
+}
+
+.calculator-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.calculator-field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.calculator-field label{
+    font-weight:700;
+}
+
+.calculator-results{
+    margin-top:25px;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid #e0e6eb;
+}
+
+.result-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:15px 18px;
+    border-bottom:1px solid #e7edf2;
+}
+
+.result-row:last-child{
+    border-bottom:0;
+}
+
+.result-row span{
+    color:#5d6d7d;
+}
+
+.result-row strong{
+    font-size:17px;
+}
+
+.result-total{
+    background:#ffc52f;
+}
+
+.result-total span,
+.result-total strong{
+    color:#102b4e;
+}
+
+.result-total strong{
+    font-size:25px;
+}
+
+.calculator-note{
+    text-align:center;
+    color:#657486;
+    font-size:13px;
+    margin-top:15px;
+}
+
+.contact{
+    margin:20px 7% 80px;
+    padding:55px;
+    border-radius:25px;
+    background:linear-gradient(120deg,#102b4e,#173e68);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.contact h2{
+    max-width:600px;
+    font-size:44px;
+    line-height:1.1;
+    margin-bottom:12px;
+}
+
+.contact p:not(.eyebrow){
+    color:#dce7f0;
+    max-width:600px;
+}
+
+.big{
+    font-size:17px;
+    white-space:nowrap;
+}
+
+footer{
+    background:#f5f7f8;
+    padding:35px 7%;
+    text-align:center;
+    color:#536273;
+}
+
+.footer-brand{
+    color:#102b4e;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.footer-links a{
+    color:#102b4e;
+    font-weight:700;
+    font-size:14px;
+}
+
+footer p{
+    font-size:12px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+@media(max-width:1000px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-art{
+        width:300px;
+        height:300px;
+    }
+
+    .globe{
+        font-size:110px;
+        left:75px;
+        top:80px;
+    }
+
+    .parcel{
+        font-size:75px;
+    }
+
+    .plane{
+        font-size:55px;
+    }
+
+    .cart{
+        font-size:60px;
+    }
+
+    .steps{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .price-box{
+        grid-template-columns:1fr;
+    }
+
+    .price-box div{
+        border-right:0;
+        border-bottom:1px solid #102b4e30;
+    }
+
+    .price-box div:last-child{
+        border:0;
+    }
+
+    .contact{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .tracking-info{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .navbar{
+        height:68px;
+        padding:0 5%;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    nav{
+        display:none;
+        position:absolute;
+        top:68px;
+        left:0;
+        right:0;
+        background:white;
+        flex-direction:column;
+        padding:20px;
+        box-shadow:0 10px 20px #0002;
+    }
+
+    nav.open{
+        display:flex;
+    }
+
+    .hero{
+        padding:55px 6%;
+        text-align:center;
+        flex-direction:column;
+        gap:50px;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .hero-points{
+        justify-content:center;
+    }
+
+    .hero-art{
+        width:270px;
+        height:270px;
+    }
+
+    .section{
+        padding:65px 6%;
+    }
+
+    .section-heading h2,
+    .contact h2{
+        font-size:35px;
+    }
+
+    .cards,
+    .store-grid,
+    .steps,
+    .payment-grid,
+    .admin-grid,
+    .calculator-grid{
+        grid-template-columns:1fr;
+    }
+
+    .step{
+        border-right:0;
+        border-bottom:1px solid #ffffff30;
+        padding-bottom:25px;
+    }
+
+    .tracking-form{
+        flex-direction:column;
+    }
+
+    .tracking-head{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .tracking-info{
+        grid-template-columns:1fr;
+    }
+
+    .contact{
+        margin:10px 5% 55px;
+        padding:35px 20px;
+    }
+
+    .big{
+        white-space:normal;
+        text-align:center;
+    }
+
+    .calculator-card{
+        padding:20px;
+    }
+
+    .brand-mark{
+        font-size:28px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header class="site-header">
-    <div class="container nav-container">
+<header class="navbar">
 
-        <a href="#home" class="brand">
-            <img src="assets/global-cart-runner-logo.png"
-                 alt="Global Cart Runner logo">
+    <a class="brand" href="#home" aria-label="Global Cart Runner home">
+
+        <span class="brand-mark">🛒</span>
+
+        <span class="brand-text">
+            <b>GLOBAL</b>
+            <strong>CART</strong>
+            <b>RUNNER</b>
+        </span>
+
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        ☰
+    </button>
+
+    <nav id="navLinks">
+
+        <a href="#home">Home</a>
+
+        <a href="#services">Services</a>
+
+        <a href="#how">How It Works</a>
+
+        <a href="#stores">Shop With Us</a>
+
+        <a href="#tracking">Track Order</a>
+
+        <a href="#calculator">Calculator</a>
+
+        <a href="#contact">Contact</a>
+
+        <a class="nav-whatsapp"
+           href="https://wa.me/26876786258"
+           target="_blank"
+           rel="noopener">
+           WhatsApp Us ↗
         </a>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-            ☰
-        </button>
+    </nav>
 
-        <nav id="mainNav">
-            <a href="#home">Home</a>
-            <a href="#stores">Shop</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#tracking">Track Order</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-    </div>
 </header>
-
 
 <main>
 
-<!-- HERO -->
+<!-- HOME -->
+
 <section class="hero" id="home">
 
-    <div class="container hero-content">
+    <div class="hero-copy">
 
-        <div class="hero-text">
+        <p class="eyebrow">
+            🌍 GLOBAL SHOPPING • 🇸🇿 ESWATINI DELIVERY
+        </p>
 
-            <span class="eyebrow">GLOBAL SHOPPING • ESWATINI DELIVERY</span>
+        <h1>
+            Shop Global.<br>
+            <span>Live Local.</span>
+        </h1>
 
-            <h1>
-                Shop Globally.
-                <span>We Bring It Home.</span>
-            </h1>
+        <p class="lead">
+            We help you order from international stores and bring your
+            favourite products to Eswatini — safely, simply and stress-free.
+        </p>
 
-            <p>
-                Global Cart Runner makes it easier to shop from selected
-                international and South African stores and have your purchases
-                brought to Eswatini.
-            </p>
+        <div class="hero-actions">
 
-            <div class="hero-buttons">
+            <a class="btn primary"
+               href="https://wa.me/26876786258?text=Hi%20Global%20Cart%20Runner%2C%20I%20would%20like%20to%20place%20an%20order."
+               target="_blank"
+               rel="noopener">
+               🛒 Start Shopping
+            </a>
 
-                <a href="#stores" class="btn btn-primary">
-                    Start Shopping
-                </a>
-
-                <a href="https://wa.me/26876786258"
-                   class="btn btn-secondary"
-                   target="_blank"
-                   rel="noopener">
-                    Order Through WhatsApp
-                </a>
-
-            </div>
+            <a class="btn secondary" href="#tracking">
+                🔎 Track My Order
+            </a>
 
         </div>
 
-        <div class="hero-card">
-
-            <div class="hero-card-icon">🛒</div>
-
-            <h3>Global Cart Runner</h3>
-
-            <p>
-                Choose your store, shop for your items and send your
-                screenshots or product links to us on WhatsApp.
-            </p>
-
-            <div class="hero-mini">
-                <strong>Runner Fee</strong>
-                <span>30%</span>
-            </div>
-
-            <div class="hero-mini">
-                <strong>Orders</strong>
-                <span>Every Saturday</span>
-            </div>
-
+        <div class="hero-points">
+            <span>✓ Secure ordering</span>
+            <span>✓ Weekly processing</span>
+            <span>✓ Optional delivery</span>
         </div>
+
+    </div>
+
+    <div class="hero-art">
+
+        <div class="globe">🌍</div>
+        <div class="parcel">📦</div>
+        <div class="plane">✈️</div>
+        <div class="cart">🛒</div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="section" id="services">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">WHAT WE DO</p>
+
+        <h2>Our Services</h2>
+
+        <p>
+            We handle the hard part so you can enjoy hassle-free shopping.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <article class="card">
+            <div class="icon">✈️</div>
+            <h3>International Orders</h3>
+            <p>Order products from supported global stores.</p>
+        </article>
+
+        <article class="card">
+            <div class="icon">🛡️</div>
+            <h3>Secure Ordering</h3>
+            <p>We make the ordering process simple and organised.</p>
+        </article>
+
+        <article class="card">
+            <div class="icon">📅</div>
+            <h3>Weekly Processing</h3>
+            <p>Orders are submitted every Saturday.</p>
+        </article>
+
+        <article class="card">
+            <div class="icon">🚚</div>
+            <h3>Delivery Options</h3>
+            <p>Choose pickup or optional door-to-door delivery.</p>
+        </article>
+
+        <article class="card">
+            <div class="icon">🔎</div>
+            <h3>Order Tracking</h3>
+            <p>Track your order using your GCR order number.</p>
+        </article>
 
     </div>
 
@@ -107,191 +1097,79 @@
 
 
 <!-- STORES -->
-<section class="section stores-section" id="stores">
 
-    <div class="container">
+<section class="stores section" id="stores">
 
-        <div class="section-heading">
+    <div class="section-heading">
 
-            <span class="eyebrow">SHOP WITH US</span>
+        <p class="eyebrow">SHOP FROM</p>
 
-            <h2>Choose Where You Want To Shop</h2>
+        <h2>Top Global & Local Stores</h2>
 
-            <p>
-                Select a store below to start shopping. When you find the
-                items you want, send us the product screenshots or links
-                through WhatsApp.
-            </p>
+        <p>
+            Choose a store, find what you want and send us the product
+            screenshot or link on WhatsApp.
+        </p>
 
-        </div>
+    </div>
 
+    <div class="store-grid">
 
-        <div class="stores-grid">
+        <a class="store-card"
+           href="https://www.shein.com/"
+           target="_blank"
+           rel="noopener">
+           SHEIN
+        </a>
 
-            <!-- SHEIN -->
-            <article class="store-card">
-                <div class="store-icon">👗</div>
+        <a class="store-card"
+           href="https://www.aliexpress.com/"
+           target="_blank"
+           rel="noopener">
+           AliExpress
+        </a>
 
-                <h3>SHEIN</h3>
+        <a class="store-card"
+           href="https://www.alibaba.com/"
+           target="_blank"
+           rel="noopener">
+           Alibaba
+        </a>
 
-                <p>
-                    Fashion, clothing, beauty, accessories and more.
-                </p>
+        <a class="store-card"
+           href="https://www.amazon.com/"
+           target="_blank"
+           rel="noopener">
+           Amazon
+        </a>
 
-                <a href="https://www.shein.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop SHEIN →
-                </a>
-            </article>
+        <a class="store-card"
+           href="https://www.banggood.com/"
+           target="_blank"
+           rel="noopener">
+           Banggood
+        </a>
 
+        <a class="store-card"
+           href="https://www.mrp.com/"
+           target="_blank"
+           rel="noopener">
+           Mr Price
+        </a>
 
-            <!-- ALIEXPRESS -->
-            <article class="store-card">
-                <div class="store-icon">🛍️</div>
+        <a class="store-card"
+           href="https://www.takealot.com/"
+           target="_blank"
+           rel="noopener">
+           Takealot
+        </a>
 
-                <h3>AliExpress</h3>
-
-                <p>
-                    Millions of products from sellers around the world.
-                </p>
-
-                <a href="https://www.aliexpress.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop AliExpress →
-                </a>
-            </article>
-
-
-            <!-- ALIBABA -->
-            <article class="store-card">
-                <div class="store-icon">🏭</div>
-
-                <h3>Alibaba</h3>
-
-                <p>
-                    Wholesale products, suppliers and business sourcing.
-                </p>
-
-                <a href="https://www.alibaba.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Alibaba →
-                </a>
-            </article>
-
-
-            <!-- AMAZON -->
-            <article class="store-card">
-                <div class="store-icon">📦</div>
-
-                <h3>Amazon</h3>
-
-                <p>
-                    Electronics, household products, fashion and more.
-                </p>
-
-                <a href="https://www.amazon.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Amazon →
-                </a>
-            </article>
-
-
-            <!-- BANGGOOD -->
-            <article class="store-card">
-                <div class="store-icon">🔧</div>
-
-                <h3>Banggood</h3>
-
-                <p>
-                    Electronics, gadgets, tools, accessories and more.
-                </p>
-
-                <a href="https://www.banggood.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Banggood →
-                </a>
-            </article>
-
-
-            <!-- MR PRICE -->
-            <article class="store-card">
-                <div class="store-icon">👕</div>
-
-                <h3>Mr Price</h3>
-
-                <p>
-                    Fashion, homeware, sportswear and more.
-                </p>
-
-                <a href="https://www.mrp.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Mr Price →
-                </a>
-            </article>
-
-
-            <!-- TAKEALOT -->
-            <article class="store-card">
-                <div class="store-icon">🛒</div>
-
-                <h3>Takealot</h3>
-
-                <p>
-                    One of South Africa's largest online shopping platforms.
-                </p>
-
-                <a href="https://www.takealot.com/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Takealot →
-                </a>
-            </article>
-
-
-            <!-- MAKRO -->
-            <article class="store-card">
-                <div class="store-icon">🏪</div>
-
-                <h3>Makro</h3>
-
-                <p>
-                    Electronics, homeware, groceries and general merchandise.
-                </p>
-
-                <a href="https://www.makro.co.za/"
-                   class="store-button"
-                   target="_blank"
-                   rel="noopener">
-                    Shop Makro →
-                </a>
-            </article>
-
-        </div>
-
-
-        <div class="shopping-note">
-
-            <strong>💡 How to order:</strong>
-
-            <span>
-                Shop on your chosen store, then send us the product
-                screenshots or links on WhatsApp.
-            </span>
-
-        </div>
+        <a class="store-card"
+           href="https://www.makro.co.za/"
+           target="_blank"
+           rel="noopener">
+           Makro
+        </a>
 
     </div>
 
@@ -299,80 +1177,49 @@
 
 
 <!-- HOW IT WORKS -->
-<section class="section dark-section" id="how-it-works">
 
-    <div class="container">
+<section class="how section" id="how">
 
-        <div class="section-heading light">
+    <div class="section-heading light">
 
-            <span class="eyebrow">SIMPLE PROCESS</span>
+        <p class="eyebrow">SIMPLE PROCESS</p>
 
-            <h2>How Global Cart Runner Works</h2>
+        <h2>How It Works</h2>
 
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+            <b>1</b>
+            <h3>Choose Your Item</h3>
             <p>
-                Shopping internationally doesn't have to be complicated.
+                Shop from one of our supported stores and find what you want.
             </p>
-
         </div>
 
+        <div class="step">
+            <b>2</b>
+            <h3>Send Us the Details</h3>
+            <p>
+                Send us the product screenshot or link on WhatsApp.
+            </p>
+        </div>
 
-        <div class="steps-grid">
+        <div class="step">
+            <b>3</b>
+            <h3>Pay & We Order</h3>
+            <p>
+                After confirmation and payment, we place your order.
+            </p>
+        </div>
 
-            <div class="step-card">
-                <div class="step-number">01</div>
-                <h3>Choose A Store</h3>
-                <p>
-                    Select one of our supported shopping platforms above.
-                </p>
-            </div>
-
-
-            <div class="step-card">
-                <div class="step-number">02</div>
-                <h3>Shop</h3>
-                <p>
-                    Find the products you want and save the product
-                    screenshots or links.
-                </p>
-            </div>
-
-
-            <div class="step-card">
-                <div class="step-number">03</div>
-                <h3>Send Us Your Items</h3>
-                <p>
-                    Send the screenshots or product links to us on WhatsApp.
-                </p>
-            </div>
-
-
-            <div class="step-card">
-                <div class="step-number">04</div>
-                <h3>Receive Your Total</h3>
-                <p>
-                    We calculate the item cost, Runner Fee and applicable
-                    shipping/delivery costs.
-                </p>
-            </div>
-
-
-            <div class="step-card">
-                <div class="step-number">05</div>
-                <h3>We Place The Order</h3>
-                <p>
-                    Orders are submitted every Saturday after confirmation.
-                </p>
-            </div>
-
-
-            <div class="step-card">
-                <div class="step-number">06</div>
-                <h3>Track Your Order</h3>
-                <p>
-                    Use your GCR order number to follow your order status.
-                </p>
-            </div>
-
+        <div class="step">
+            <b>4</b>
+            <h3>Track & Receive</h3>
+            <p>
+                Use your GCR number to follow your order until delivery.
+            </p>
         </div>
 
     </div>
@@ -381,143 +1228,318 @@
 
 
 <!-- PRICING -->
-<section class="section" id="pricing">
 
-    <div class="container">
+<section class="pricing section">
 
-        <div class="section-heading">
+    <div class="price-box">
 
-            <span class="eyebrow">PRICING</span>
+        <div>
+            <small>RUNNER FEE</small>
+            <strong>30%</strong>
+        </div>
 
-            <h2>Simple Runner Fee</h2>
+        <div>
+            <small>ORDER DAY</small>
+            <strong>Every Saturday</strong>
+        </div>
+
+        <div>
+            <small>TOTAL COST</small>
+            <strong>Item + Shipping + Runner Fee</strong>
+        </div>
+
+    </div>
+
+    <p class="fine-print">
+        Shipping fees depend on the item's weight, size and shipping method.
+        The final amount is confirmed before ordering.
+    </p>
+
+</section>
+
+
+<!-- PAYMENT -->
+
+<section class="section payment" id="payment">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">PAYMENT</p>
+
+        <h2>Payment Options</h2>
+
+        <p>
+            Only pay after your final order amount has been confirmed.
+        </p>
+
+    </div>
+
+    <div class="payment-grid">
+
+        <article class="payment-card">
+
+            <div class="icon">📱</div>
+
+            <h3>MTN Mobile Money</h3>
 
             <p>
-                Our Runner Fee is calculated from the value of the items
-                you order.
+                <b>Number:</b> 76786258
             </p>
 
-        </div>
+            <p>
+                <b>Account name:</b> Thandeka Magongo
+            </p>
 
+            <p>
+                <b>Reference:</b> Your GCR Order Number
+            </p>
 
-        <div class="pricing-card">
+            <p class="small">
+                Send proof of payment on WhatsApp after payment.
+            </p>
 
-            <div class="pricing-main">
-                <span class="pricing-label">RUNNER FEE</span>
-                <strong>30%</strong>
-                <p>of your item subtotal</p>
-            </div>
+        </article>
 
+        <article class="payment-card pending">
 
-            <div class="pricing-details">
+            <div class="icon">🏦</div>
 
-                <div>
-                    <span>Item Price</span>
-                    <strong>Product cost</strong>
-                </div>
+            <h3>Bank Transfer / EFT</h3>
 
-                <div>
-                    <span>Runner Fee</span>
-                    <strong>30%</strong>
-                </div>
+            <p>
+                Banking details will be added later.
+            </p>
 
-                <div>
-                    <span>Shipping</span>
-                    <strong>Calculated separately</strong>
-                </div>
+            <span>COMING SOON</span>
 
-                <div>
-                    <span>Ordering Day</span>
-                    <strong>Every Saturday</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="payment-box">
-
-            <h3>Payment Options</h3>
-
-            <div class="payment-option">
-
-                <h4>MTN Mobile Money</h4>
-
-                <p>
-                    <strong>Number:</strong> 76786258
-                </p>
-
-                <p>
-                    <strong>Account Name:</strong> Thandeka Magongo
-                </p>
-
-                <p>
-                    <strong>Reference:</strong> Your GCR Order Number
-                </p>
-
-            </div>
-
-
-            <div class="payment-option coming-soon">
-
-                <h4>Bank / EFT</h4>
-
-                <span>Coming Soon</span>
-
-            </div>
-
-        </div>
+        </article>
 
     </div>
 
 </section>
 
 
-<!-- TRACKING -->
-<section class="section tracking-section" id="tracking">
+<!-- CUSTOMER TRACKING -->
 
-    <div class="container">
+<section class="section tracking" id="tracking">
 
-        <div class="section-heading">
+    <div class="section-heading">
 
-            <span class="eyebrow">ORDER TRACKING</span>
+        <p class="eyebrow">ORDER TRACKING</p>
 
-            <h2>Track Your GCR Order</h2>
+        <h2>Track Your Order</h2>
 
-            <p>
-                Enter your Global Cart Runner order number to check your
-                current order status.
-            </p>
+        <p>
+            Enter the GCR order number given to you by Global Cart Runner.
+        </p>
 
-        </div>
+    </div>
+
+    <form id="trackingForm" class="tracking-form">
+
+        <input
+            type="text"
+            id="trackingNumber"
+            placeholder="Example: GCR-1001"
+            autocomplete="off"
+            required
+        >
+
+        <button class="btn primary" type="submit">
+            Track Order
+        </button>
+
+    </form>
+
+    <div id="trackingResult"
+         class="tracking-result"
+         aria-live="polite">
+    </div>
+
+</section>
 
 
-        <div class="tracking-card">
+<!-- ADMIN ORDER MANAGER -->
 
-            <label for="trackingNumber">
-                GCR Order Number
-            </label>
+<section class="admin-section section" id="admin">
 
-            <div class="tracking-form">
+    <div class="section-heading">
 
-                <input
-                    type="text"
-                    id="trackingNumber"
-                    placeholder="Example: GCR-1001"
-                    autocomplete="off"
-                >
+        <p class="eyebrow">ADMIN</p>
 
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    id="trackButton">
-                    Track Order
-                </button>
+        <h2>Order Manager</h2>
+
+        <p>
+            Manage Global Cart Runner orders and update their tracking status.
+        </p>
+
+    </div>
+
+    <div class="admin-card">
+
+        <form id="adminOrderForm">
+
+            <div class="admin-grid">
+
+                <div class="form-group">
+
+                    <label for="adminOrderNumber">
+                        GCR Order Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminOrderNumber"
+                        placeholder="Example: GCR-1002"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminCustomer">
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminCustomer"
+                        placeholder="Customer name"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminOrderDate">
+                        Order Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="adminOrderDate"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminStatus">
+                        Order Status
+                    </label>
+
+                    <select id="adminStatus">
+
+                        <option>Order Received</option>
+                        <option>Payment Pending</option>
+                        <option>Payment Received</option>
+                        <option>Order Placed</option>
+                        <option>Processing</option>
+                        <option>Shipped</option>
+                        <option>Arrived in Eswatini</option>
+                        <option>Out for Delivery</option>
+                        <option>Delivered</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminPayment">
+                        Payment Status
+                    </label>
+
+                    <select id="adminPayment">
+
+                        <option>Pending</option>
+                        <option>Received</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminDelivery">
+                        Delivery Preference
+                    </label>
+
+                    <select id="adminDelivery">
+
+                        <option>Standard Delivery</option>
+                        <option>Express Delivery</option>
+                        <option>Collection</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminItems">
+                        Order / Items
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminItems"
+                        placeholder="Example: SHEIN clothing order"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="adminLastUpdate">
+                        Last Update
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminLastUpdate"
+                        placeholder="Example: Payment received"
+                    >
+
+                </div>
 
             </div>
 
+            <div class="form-group">
 
-            <div id="trackingResult" class="tracking-result"></div>
+                <label for="adminNotes">
+                    Customer Update / Notes
+                </label>
+
+                <textarea
+                    id="adminNotes"
+                    rows="4"
+                    placeholder="Message the customer should see when tracking the order..."
+                ></textarea>
+
+            </div>
+
+            <button type="submit" class="btn primary">
+                Save / Update Order
+            </button>
+
+        </form>
+
+        <div id="adminMessage"
+             class="admin-message"
+             aria-live="polite">
+        </div>
+
+        <div class="admin-orders">
+
+            <h3>Saved Orders</h3>
+
+            <div id="adminOrdersList">
+                No orders saved yet.
+            </div>
 
         </div>
 
@@ -527,178 +1549,165 @@
 
 
 <!-- CONTACT -->
-<section class="section contact-section" id="contact">
 
-    <div class="container contact-grid">
+<section class="contact section" id="contact">
 
-        <div>
+    <div>
 
-            <span class="eyebrow">READY TO SHOP?</span>
+        <p class="eyebrow">READY TO SHOP?</p>
 
-            <h2>
-                Find Your Items.
-                We'll Bring Them Home.
-            </h2>
+        <h2>
+            Let's bring the world closer to you.
+        </h2>
 
-            <p>
-                Browse one of our supported stores, choose your products and
-                send us the screenshots or links on WhatsApp.
-            </p>
-
-            <a href="https://wa.me/26876786258"
-               class="btn btn-primary whatsapp-button"
-               target="_blank"
-               rel="noopener">
-                📲 Chat With Global Cart Runner
-            </a>
-
-        </div>
-
-
-        <div class="contact-card">
-
-            <h3>Global Cart Runner</h3>
-
-            <p>
-                <strong>WhatsApp</strong>
-            </p>
-
-            <a href="https://wa.me/26876786258"
-               target="_blank"
-               rel="noopener">
-                +268 76786258
-            </a>
-
-            <hr>
-
-            <p>
-                Orders are submitted every Saturday.
-            </p>
-
-            <p>
-                Delivery available in Eswatini.
-            </p>
-
-        </div>
+        <p>
+            WhatsApp Global Cart Runner and send a screenshot or link
+            of the product you want.
+        </p>
 
     </div>
+
+    <a
+        class="btn primary big"
+        href="https://wa.me/26876786258?text=Hi%20Global%20Cart%20Runner%2C%20I%20want%20to%20order%20an%20item."
+        target="_blank"
+        rel="noopener"
+    >
+        💬 WhatsApp: +268 76786258
+    </a>
 
 </section>
 
 
-<!-- ADMIN ORDER MANAGER -->
-<section class="section admin-section" id="admin">
-    <div class="container">
-        <div class="section-heading">
-            <span class="eyebrow">ADMIN</span>
-            <h2>Order Manager</h2>
-            <p>
-                Manage Global Cart Runner orders and update their
-                tracking status.
-            </p>
-        </div>
+<!-- CALCULATOR - FINAL SECTION -->
 
-        <div class="admin-card">
+<section class="calculator-section section" id="calculator">
 
-            <form id="adminOrderForm">
+    <div class="section-heading">
 
-                <div class="admin-grid">
+        <p class="eyebrow">PRICE CALCULATOR</p>
 
-                    <div class="form-group">
-                        <label for="adminOrderNumber">GCR Order Number</label>
-                        <input type="text"
-                               id="adminOrderNumber"
-                               placeholder="Example: GCR-1002"
-                               required>
-                    </div>
+        <h2>Calculate Your Estimated Order Cost</h2>
 
-                    <div class="form-group">
-                        <label for="adminCustomer">Customer Name</label>
-                        <input type="text"
-                               id="adminCustomer"
-                               placeholder="Customer name"
-                               required>
-                    </div>
+        <p>
+            Enter the item price, quantity and estimated shipping fee
+            to see the 30% runner fee and estimated total.
+        </p>
 
-                    <div class="form-group">
-                        <label for="adminOrderDate">Order Date</label>
-                        <input type="date"
-                               id="adminOrderDate"
-                               required>
-                    </div>
+    </div>
 
-                    <div class="form-group">
-                        <label for="adminStatus">Order Status</label>
-                        <select id="adminStatus">
-                            <option>Order Received</option>
-                            <option>Payment Pending</option>
-                            <option>Payment Received</option>
-                            <option>Order Placed</option>
-                            <option>Processing</option>
-                            <option>Shipped</option>
-                            <option>Arrived in Eswatini</option>
-                            <option>Out for Delivery</option>
-                            <option>Delivered</option>
-                        </select>
-                    </div>
+    <div class="calculator-card">
 
-                    <div class="form-group">
-                        <label for="adminPayment">Payment Status</label>
-                        <select id="adminPayment">
-                            <option>Pending</option>
-                            <option>Received</option>
-                        </select>
-                    </div>
+        <div class="calculator-grid">
 
-                    <div class="form-group">
-                        <label for="adminDelivery">Delivery Preference</label>
-                        <select id="adminDelivery">
-                            <option>Standard Delivery</option>
-                            <option>Express Delivery</option>
-                            <option>Collection</option>
-                        </select>
-                    </div>
+            <div class="calculator-field">
 
-                    <div class="form-group">
-                        <label for="adminItems">Order / Items</label>
-                        <input type="text"
-                               id="adminItems"
-                               placeholder="Example: SHEIN clothing order">
-                    </div>
+                <label for="calcItemPrice">
+                    Item Price (E)
+                </label>
 
-                    <div class="form-group">
-                        <label for="adminLastUpdate">Last Update</label>
-                        <input type="text"
-                               id="adminLastUpdate"
-                               placeholder="Example: Payment received">
-                    </div>
+                <input
+                    id="calcItemPrice"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                    inputmode="decimal"
+                    placeholder="0.00"
+                >
 
-                </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="adminNotes">Customer Update / Notes</label>
-                    <textarea id="adminNotes"
-                              rows="4"
-                              placeholder="Message the customer should see when tracking the order..."></textarea>
-                </div>
+            <div class="calculator-field">
 
-                <button type="submit" class="btn btn-primary">
-                    Save / Update Order
-                </button>
+                <label for="calcQuantity">
+                    Quantity
+                </label>
 
-            </form>
+                <input
+                    id="calcQuantity"
+                    type="number"
+                    min="1"
+                    step="1"
+                    value="1"
+                    inputmode="numeric"
+                >
 
-            <div id="adminMessage" class="admin-message"></div>
+            </div>
 
-            <div class="admin-orders">
-                <h3>Saved Orders</h3>
-                <div id="adminOrdersList">
-                    No orders saved yet.
-                </div>
+            <div class="calculator-field">
+
+                <label for="calcShipping">
+                    Estimated Shipping (E)
+                </label>
+
+                <input
+                    id="calcShipping"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                    inputmode="decimal"
+                    placeholder="0.00"
+                >
+
             </div>
 
         </div>
+
+
+        <div class="calculator-results">
+
+            <div class="result-row">
+
+                <span>Item Subtotal</span>
+
+                <strong>
+                    E <span id="calcSubtotal">0.00</span>
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Runner Fee (30%)</span>
+
+                <strong>
+                    E <span id="calcRunnerFee">0.00</span>
+                </strong>
+
+            </div>
+
+            <div class="result-row">
+
+                <span>Shipping</span>
+
+                <strong>
+                    E <span id="calcShippingDisplay">0.00</span>
+                </strong>
+
+            </div>
+
+            <div class="result-row result-total">
+
+                <span>Estimated Total</span>
+
+                <strong>
+                    E <span id="calcTotal">0.00</span>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <p class="calculator-note">
+            This is an estimate only. The final amount may change after
+            the actual product and shipping costs are confirmed.
+        </p>
+
     </div>
+
 </section>
 
 </main>
@@ -706,26 +1715,767 @@
 
 <footer>
 
-    <div class="container footer-content">
+    <div class="footer-brand">
+        🛒 <b>GLOBAL CART RUNNER</b>
+    </div>
 
-        <div>
-            <strong>Global Cart Runner</strong>
-            <p>Shop Globally. We Bring It Home.</p>
-        </div>
+    <div class="footer-links">
 
-        <div>
-            <p>
-                © <span id="currentYear"></span>
-                Global Cart Runner. All rights reserved.
-            </p>
-        </div>
+        <a href="#home">Home</a>
+
+        <a href="#services">Services</a>
+
+        <a href="#stores">Shop</a>
+
+        <a href="#tracking">Track Order</a>
+
+        <a href="#calculator">Calculator</a>
+
+        <a href="#contact">Contact</a>
 
     </div>
+
+    <p>
+        © 2026 Global Cart Runner. All rights reserved.
+    </p>
 
 </footer>
 
 
-<script src="script.js"></script>
+<script>
+
+const WA_NUMBER = "26876786258";
+
+const RUNNER_RATE = 0.30;
+
+const STORAGE_KEY = "gcrOrders";
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuBtn = document.getElementById("menuBtn");
+
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+    navLinks.classList.toggle("open");
+
+});
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.classList.remove("open");
+
+    });
+
+});
+
+
+/* =========================
+   ORDER STATUSES
+========================= */
+
+const orderStatuses = [
+
+    "Order Received",
+    "Payment Pending",
+    "Payment Received",
+    "Order Placed",
+    "Processing",
+    "Shipped",
+    "Arrived in Eswatini",
+    "Out for Delivery",
+    "Delivered"
+
+];
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function money(value){
+
+    const number = Number(value);
+
+    if(!Number.isFinite(number)){
+        return "0.00";
+    }
+
+    return number.toFixed(2);
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value ?? "").replace(
+        /[&<>"']/g,
+        character => ({
+
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+
+        })[character]
+    );
+
+}
+
+
+function cleanOrderNumber(value){
+
+    return String(value || "")
+        .trim()
+        .toUpperCase();
+
+}
+
+
+/* =========================
+   ORDER STORAGE
+========================= */
+
+function getOrders(){
+
+    try{
+
+        const raw = localStorage.getItem(STORAGE_KEY);
+
+        if(raw){
+
+            return JSON.parse(raw);
+
+        }
+
+    }catch(error){
+
+        console.error("Could not read orders:", error);
+
+    }
+
+    return {};
+
+}
+
+
+function saveOrders(orders){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(orders)
+    );
+
+}
+
+
+/* =========================
+   CUSTOMER TRACKING
+========================= */
+
+function renderTracking(order){
+
+    const box = document.getElementById("trackingResult");
+
+    if(!order){
+
+        box.innerHTML = `
+
+            <div class="tracking-card error">
+
+                <b>Order not found.</b>
+
+                <p>
+                    Please check your GCR order number and try again.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let currentIndex =
+        orderStatuses.indexOf(order.status);
+
+    if(currentIndex < 0){
+
+        currentIndex = 0;
+
+    }
+
+
+    const timeline =
+        orderStatuses.map((status,index) => {
+
+            const completed =
+                index <= currentIndex
+                ? "done"
+                : "";
+
+            const current =
+                index === currentIndex
+                ? "<small>Current status</small>"
+                : "";
+
+            return `
+
+                <li class="${completed}">
+
+                    <span>
+                        ${escapeHtml(status)}
+                    </span>
+
+                    ${current}
+
+                </li>
+
+            `;
+
+        }).join("");
+
+
+    box.innerHTML = `
+
+        <div class="tracking-card">
+
+            <div class="tracking-head">
+
+                <div>
+
+                    <h3>
+                        ${escapeHtml(order.orderNumber)}
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(order.customer || "")}
+                    </p>
+
+                </div>
+
+                <span class="status">
+                    ${escapeHtml(order.status)}
+                </span>
+
+            </div>
+
+
+            <div class="tracking-info">
+
+                <p>
+                    <b>Order Date</b><br>
+                    ${escapeHtml(order.orderDate || "")}
+                </p>
+
+                <p>
+                    <b>Payment</b><br>
+                    ${escapeHtml(order.paymentStatus || "")}
+                </p>
+
+                <p>
+                    <b>Delivery</b><br>
+                    ${escapeHtml(order.delivery || "")}
+                </p>
+
+                <p>
+                    <b>Last Update</b><br>
+                    ${escapeHtml(order.updated || "")}
+                </p>
+
+            </div>
+
+
+            <p>
+                <b>Order / Items:</b>
+                ${escapeHtml(order.items || "Not provided")}
+            </p>
+
+
+            ${
+                order.note
+                ? `
+                    <p style="margin-top:12px">
+                        <b>Customer Update:</b>
+                        ${escapeHtml(order.note)}
+                    </p>
+                  `
+                : ""
+            }
+
+
+            <ol class="timeline">
+
+                ${timeline}
+
+            </ol>
+
+        </div>
+
+    `;
+
+}
+
+
+document
+    .getElementById("trackingForm")
+    .addEventListener("submit", event => {
+
+        event.preventDefault();
+
+        const number =
+            cleanOrderNumber(
+                document.getElementById("trackingNumber").value
+            );
+
+        const orders = getOrders();
+
+        renderTracking(orders[number]);
+
+    });
+
+
+/* =========================
+   ADMIN ORDER MANAGER
+========================= */
+
+function renderAdminOrders(){
+
+    const list =
+        document.getElementById("adminOrdersList");
+
+    const orders =
+        getOrders();
+
+    const values =
+        Object.values(orders)
+        .sort((a,b) =>
+            String(a.orderNumber)
+            .localeCompare(String(b.orderNumber))
+        );
+
+
+    if(values.length === 0){
+
+        list.innerHTML =
+            "No orders saved yet.";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        values.map(order => `
+
+            <div class="admin-order-item">
+
+                <strong>
+                    ${escapeHtml(order.orderNumber)}
+                </strong>
+
+                <br>
+
+                Customer:
+                ${escapeHtml(order.customer || "")}
+
+                <br>
+
+                Status:
+                ${escapeHtml(order.status || "")}
+
+                <br>
+
+                Payment:
+                ${escapeHtml(order.paymentStatus || "")}
+
+                <div class="admin-order-actions">
+
+                    <button
+                        class="btn secondary"
+                        type="button"
+                        data-edit="${escapeHtml(order.orderNumber)}"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        class="btn primary"
+                        type="button"
+                        data-view="${escapeHtml(order.orderNumber)}"
+                    >
+                        View
+                    </button>
+
+                    <button
+                        class="btn admin-delete-button"
+                        type="button"
+                        data-delete="${escapeHtml(order.orderNumber)}"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+
+    list.querySelectorAll("[data-edit]").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            loadAdminOrder(button.dataset.edit);
+
+        });
+
+    });
+
+
+    list.querySelectorAll("[data-view]").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const number =
+                button.dataset.view;
+
+            document.getElementById("trackingNumber").value =
+                number;
+
+            document
+                .getElementById("tracking")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            renderTracking(
+                getOrders()[number]
+            );
+
+        });
+
+    });
+
+
+    list.querySelectorAll("[data-delete]").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            deleteOrder(button.dataset.delete);
+
+        });
+
+    });
+
+}
+
+
+function loadAdminOrder(number){
+
+    const order =
+        getOrders()[number];
+
+    if(!order){
+
+        return;
+
+    }
+
+
+    document.getElementById("adminOrderNumber").value =
+        order.orderNumber || "";
+
+    document.getElementById("adminCustomer").value =
+        order.customer || "";
+
+    document.getElementById("adminOrderDate").value =
+        order.orderDate || "";
+
+    document.getElementById("adminStatus").value =
+        order.status || "Order Received";
+
+    document.getElementById("adminPayment").value =
+        order.paymentStatus || "Pending";
+
+    document.getElementById("adminDelivery").value =
+        order.delivery || "Standard Delivery";
+
+    document.getElementById("adminItems").value =
+        order.items || "";
+
+    document.getElementById("adminLastUpdate").value =
+        order.updated || "";
+
+    document.getElementById("adminNotes").value =
+        order.note || "";
+
+
+    window.scrollTo({
+
+        top:document.getElementById("admin").offsetTop - 70,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+function deleteOrder(number){
+
+    const orders =
+        getOrders();
+
+    if(!orders[number]){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Delete " +
+            number +
+            " from this browser?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    delete orders[number];
+
+    saveOrders(orders);
+
+    renderAdminOrders();
+
+
+    document.getElementById("adminMessage").textContent =
+        number + " deleted.";
+
+}
+
+
+document
+    .getElementById("adminOrderForm")
+    .addEventListener("submit", event => {
+
+        event.preventDefault();
+
+
+        const number =
+            cleanOrderNumber(
+                document.getElementById("adminOrderNumber").value
+            );
+
+
+        if(!/^GCR-\d+$/.test(number)){
+
+            document.getElementById("adminMessage").textContent =
+                "Use an order number such as GCR-1002.";
+
+            return;
+
+        }
+
+
+        const customer =
+            document.getElementById("adminCustomer").value.trim();
+
+
+        const orderDate =
+            document.getElementById("adminOrderDate").value;
+
+
+        if(!customer || !orderDate){
+
+            document.getElementById("adminMessage").textContent =
+                "Please complete the customer name and order date.";
+
+            return;
+
+        }
+
+
+        const orders =
+            getOrders();
+
+
+        const oldOrder =
+            orders[number] || {};
+
+
+        orders[number] = {
+
+            orderNumber:number,
+
+            customer:customer,
+
+            orderDate:orderDate,
+
+            status:
+                document.getElementById("adminStatus").value,
+
+            paymentStatus:
+                document.getElementById("adminPayment").value,
+
+            delivery:
+                document.getElementById("adminDelivery").value,
+
+            items:
+                document.getElementById("adminItems").value.trim(),
+
+            updated:
+                document.getElementById("adminLastUpdate").value.trim()
+                ||
+                new Date().toLocaleString(),
+
+            note:
+                document.getElementById("adminNotes").value.trim(),
+
+            created:
+                oldOrder.created
+                ||
+                new Date().toISOString()
+
+        };
+
+
+        saveOrders(orders);
+
+        renderAdminOrders();
+
+
+        document.getElementById("adminMessage").textContent =
+            number + " saved successfully.";
+
+    });
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+const calcItemPrice =
+    document.getElementById("calcItemPrice");
+
+const calcQuantity =
+    document.getElementById("calcQuantity");
+
+const calcShipping =
+    document.getElementById("calcShipping");
+
+
+function calculateOrder(){
+
+    let itemPrice =
+        Number(calcItemPrice.value);
+
+    let quantity =
+        Number(calcQuantity.value);
+
+    let shipping =
+        Number(calcShipping.value);
+
+
+    if(!Number.isFinite(itemPrice) || itemPrice < 0){
+
+        itemPrice = 0;
+
+    }
+
+
+    if(!Number.isFinite(quantity) || quantity < 1){
+
+        quantity = 1;
+
+    }
+
+
+    quantity =
+        Math.floor(quantity);
+
+
+    if(!Number.isFinite(shipping) || shipping < 0){
+
+        shipping = 0;
+
+    }
+
+
+    const subtotal =
+        itemPrice * quantity;
+
+
+    const runnerFee =
+        subtotal * RUNNER_RATE;
+
+
+    const total =
+        subtotal +
+        runnerFee +
+        shipping;
+
+
+    document.getElementById("calcSubtotal")
+        .textContent =
+        money(subtotal);
+
+
+    document.getElementById("calcRunnerFee")
+        .textContent =
+        money(runnerFee);
+
+
+    document.getElementById("calcShippingDisplay")
+        .textContent =
+        money(shipping);
+
+
+    document.getElementById("calcTotal")
+        .textContent =
+        money(total);
+
+}
+
+
+[
+    calcItemPrice,
+    calcQuantity,
+    calcShipping
+].forEach(input => {
+
+    input.addEventListener(
+        "input",
+        calculateOrder
+    );
+
+});
+
+
+calculateOrder();
+
+
+/* =========================
+   INITIALISE
+========================= */
+
+renderAdminOrders();
+
+</script>
 
 </body>
 </html>
