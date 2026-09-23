@@ -463,15 +463,7 @@ footer .small{
                         placeholder="Example: 500">
                 </div>
 
-                <div class="form-group">
-                    <label for="calcQuantity">Quantity</label>
-                    <input
-                        type="number"
-                        id="calcQuantity"
-                        min="1"
-                        step="1"
-                        value="1">
-                </div>
+
 
                 <div
                     class="form-group hidden"
@@ -864,7 +856,6 @@ document.getElementById("currentYear").textContent =
 
 const calcStore = document.getElementById("calcStore");
 const calcPrice = document.getElementById("calcPrice");
-const calcQuantity = document.getElementById("calcQuantity");
 const calcShipping = document.getElementById("calcShipping");
 const shippingGroup = document.getElementById("shippingGroup");
 const shippingNotice = document.getElementById("shippingNotice");
@@ -904,7 +895,6 @@ document.getElementById("calculateButton")
 
     const store = calcStore.value;
     const price = Number(calcPrice.value);
-    const quantity = Number(calcQuantity.value);
     let shipping = Number(calcShipping.value);
 
     if(!store){
@@ -914,11 +904,6 @@ document.getElementById("calculateButton")
 
     if(!Number.isFinite(price) || price < 0){
         alert("Please enter a valid item price.");
-        return;
-    }
-
-    if(!Number.isFinite(quantity) || quantity < 1){
-        alert("Please enter a valid quantity.");
         return;
     }
 
@@ -933,7 +918,7 @@ document.getElementById("calculateButton")
         }
     }
 
-    const subtotal = price * quantity;
+    const subtotal = price;
     const runnerFee = subtotal * 0.30;
     const total = subtotal + runnerFee + shipping;
 
@@ -965,7 +950,6 @@ document.getElementById("clearCalculator")
 
     calcStore.value = "";
     calcPrice.value = "";
-    calcQuantity.value = "1";
     calcShipping.value = "";
 
     shippingGroup.classList.add("hidden");
